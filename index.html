@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>maxojkb</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fdfcfb;
+      --ink: #1a1814;
+      --ink-light: #9a9690;
+      --rule: #e6e3dd;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      background: var(--bg);
+    }
+
+    .nav-logo {
+      font-family: 'Inconsolata', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-info {
+      font-family: 'Inconsolata', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: var(--ink-light);
+      transition: color 0.15s;
+    }
+
+    .nav-info:hover { color: var(--ink); }
+
+    main { padding-top: 72px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .work-item {
+      padding: 40px;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .work-item:nth-child(odd)  { border-right: 1px solid var(--rule); }
+    .work-item:nth-child(1) { animation-delay: 0.04s; }
+    .work-item:nth-child(2) { animation-delay: 0.09s; }
+    .work-item:nth-child(3) { animation-delay: 0.14s; }
+    .work-item:nth-child(4) { animation-delay: 0.19s; }
+    .work-item:nth-child(5) { animation-delay: 0.24s; }
+    .work-item:nth-child(6) { animation-delay: 0.29s; }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    .work-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #edeae4;
+      margin-bottom: 14px;
+    }
+
+    .work-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s;
+    }
+
+    .work-item:hover .work-image img { opacity: 0.9; }
+
+    .work-meta { margin-bottom: 12px; }
+
+    .work-title {
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .work-info {
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .work-actions { display: flex; gap: 8px; }
+
+    .btn {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14px;
+      padding: 5px 12px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-block;
+    }
+
+    .btn:hover { background: var(--ink); color: var(--bg); }
+
+    .btn-ghost {
+      border-color: var(--rule);
+      color: var(--ink-light);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 22px 40px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    footer span, footer a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      color: var(--ink-light);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 680px) {
+      nav { padding: 18px 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .work-item { padding: 28px 20px; border-right: none !important; }
+      footer { padding: 20px; flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://www.instagram.com/maxojkb" target="_blank" rel="noopener" class="nav-logo">@maxojkb</a>
+    <a href="cv.html" class="nav-info">info</a>
+  </nav>
+
+  <main>
+    <div class="grid">
+
+      <div class="work-item">
+        <div class="work-image">
+          <img src="images/work-01.jpg" alt="Untitled I" />
+        </div>
+        <div class="work-meta">
+          <span class="work-title">Untitled I</span>
+          <span class="work-info">Ink on paper, 8" × 11"</span>
+        </div>
+        <div class="work-actions">
+          <a href="#shopify-print-01" class="btn">Buy Print</a>
+          <a href="/cdn-cgi/l/email-protection#6d000c150207060f2d1d1f02190203430008521e180f07080e195024031c18041f14574d38031904190108094d24" class="btn btn-ghost">Inquire Original</a>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-image">
+          <img src="images/work-02.jpg" alt="Untitled II" />
+        </div>
+        <div class="work-meta">
+          <span class="work-title">Untitled II</span>
+          <span class="work-info">Ink on paper, 8" × 11"</span>
+        </div>
+        <div class="work-actions">
+          <a href="#shopify-print-02" class="btn">Buy Print</a>
+          <a href="/cdn-cgi/l/email-protection#4f222e372025242d0f3f3d203b202161222a703c3a2d252a2c3b7206213e3a263d36756f1a213b263b232a2b6f0606" class="btn btn-ghost">Inquire Original</a>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-image">
+          <img src="images/work-03.jpg" alt="Untitled III" />
+        </div>
+        <div class="work-meta">
+          <span class="work-title">Untitled III</span>
+          <span class="work-info">Watercolour on paper, 9" × 12"</span>
+        </div>
+        <div class="work-actions">
+          <a href="#shopify-print-03" class="btn">Buy Print</a>
+          <a href="/cdn-cgi/l/email-protection#7a171b02151011183a0a08150e151454171f45090f18101f190e4733140b0f130803405a2f140e130e161f1e5a333333" class="btn btn-ghost">Inquire Original</a>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-image">
+          <img src="images/work-04.jpg" alt="Untitled IV" />
+        </div>
+        <div class="work-meta">
+          <span class="work-title">Untitled IV</span>
+          <span class="work-info">Pencil on paper, 6" × 8"</span>
+        </div>
+        <div class="work-actions">
+          <a href="#shopify-print-04" class="btn">Buy Print</a>
+          <a href="/cdn-cgi/l/email-protection#7a171b02151011183a0a08150e151454171f45090f18101f190e4733140b0f130803405a2f140e130e161f1e5a333333" class="btn btn-ghost">Inquire Original</a>
+        </div>
+      </div>
