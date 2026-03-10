@@ -35,14 +35,12 @@
     }
 
     .nav-logo {
-      font-family: 'Times New Roman', Times, serif;
       font-size: 16px;
       text-decoration: none;
       color: var(--ink);
     }
 
     .nav-info {
-      font-family: 'Times New Roman', Times, serif;
       font-size: 16px;
       text-decoration: none;
       color: var(--ink-light);
@@ -66,12 +64,6 @@
     }
 
     .work-item:nth-child(odd) { border-right: 1px solid var(--rule); }
-    .work-item:nth-child(1) { animation-delay: 0.04s; }
-    .work-item:nth-child(2) { animation-delay: 0.09s; }
-    .work-item:nth-child(3) { animation-delay: 0.14s; }
-    .work-item:nth-child(4) { animation-delay: 0.19s; }
-    .work-item:nth-child(5) { animation-delay: 0.24s; }
-    .work-item:nth-child(6) { animation-delay: 0.29s; }
 
     @keyframes fadeIn { to { opacity: 1; } }
 
@@ -126,6 +118,21 @@
 
     .btn:hover { background: var(--ink); color: var(--bg); }
 
+    .btn-ghost {
+      border-color: var(--rule);
+      color: var(--ink-light);
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .btn-ghost:hover {
+      background: transparent;
+      color: var(--ink-light);
+    }
+
+    /* Hide Shopify's rendered components entirely — we use our own buttons */
+    [id^='shopify-mount-'] { display: none !important; }
+
     footer {
       border-top: 1px solid var(--rule);
       padding: 22px 40px;
@@ -154,75 +161,130 @@
 
   <nav>
     <a href="https://www.instagram.com/maxojkb" target="_blank" rel="noopener" class="nav-logo">@maxojkb</a>
-    <a href="cv.html" class="nav-info">info</a>
+    <a href="cv.html" class="nav-info">INFO</a>
   </nav>
 
   <main>
-    <div class="grid">
-
-      <div class="work-item">
-        <div class="work-image">
-          <img src="images/work-01.jpg" alt="Untitled I" />
-        </div>
-        <div class="work-meta">
-          <span class="work-title">Untitled I</span>
-          <span class="work-info">Ink on paper, 8" × 11"</span>
-        </div>
-        <div class="work-actions">
-          <a href="#shopify-print-01" class="btn">Buy Print</a>
-          <a href="mailto:maxojkb@proton.me?subject=Inquiry: Untitled I" class="btn">Inquire Original</a>
-        </div>
-      </div>
-
-      <div class="work-item">
-        <div class="work-image">
-          <img src="images/work-02.jpg" alt="Untitled II" />
-        </div>
-        <div class="work-meta">
-          <span class="work-title">Untitled II</span>
-          <span class="work-info">Ink on paper, 8" × 11"</span>
-        </div>
-        <div class="work-actions">
-          <a href="#shopify-print-02" class="btn">Buy Print</a>
-          <a href="mailto:maxojkb@proton.me?subject=Inquiry: Untitled II" class="btn">Inquire Original</a>
-        </div>
-      </div>
-
-      <div class="work-item">
-        <div class="work-image">
-          <img src="images/work-03.jpg" alt="Untitled III" />
-        </div>
-        <div class="work-meta">
-          <span class="work-title">Untitled III</span>
-          <span class="work-info">Watercolour on paper, 9" × 12"</span>
-        </div>
-        <div class="work-actions">
-          <a href="#shopify-print-03" class="btn">Buy Print</a>
-          <a href="mailto:maxojkb@proton.me?subject=Inquiry: Untitled III" class="btn">Inquire Original</a>
-        </div>
-      </div>
-
-      <div class="work-item">
-        <div class="work-image">
-          <img src="images/work-04.jpg" alt="Untitled IV" />
-        </div>
-        <div class="work-meta">
-          <span class="work-title">Untitled IV</span>
-          <span class="work-info">Pencil on paper, 6" × 8"</span>
-        </div>
-        <div class="work-actions">
-          <a href="#shopify-print-04" class="btn">Buy Print</a>
-          <a href="mailto:maxojkb@proton.me?subject=Inquiry: Untitled IV" class="btn">Inquire Original</a>
-        </div>
-      </div>
-
-    </div>
+    <div class="grid" id="grid"></div>
   </main>
 
   <footer>
-    <span>© 2025 maxojkb</span>
+    <span>© 2026</span>
     <a href="mailto:maxojkb@proton.me">maxojkb@proton.me</a>
   </footer>
+
+  <script src="config.js"></script>
+  <script>
+    // ── Build the grid from config ──────────────────────────────────────────
+    const grid = document.getElementById("grid");
+    const componentMap = {}; // productId → Shopify UI component, populated after SDK loads
+
+    WORKS.forEach((work, i) => {
+      const mountId = `shopify-mount-${work.shopifyProductId}`;
+
+      const inquireSubject = 'Inquiry: ' + work.title;
+      const inquireBody =
+        'Hi Maxime,\n\n' +
+        'I\'m interested in purchasing the original work:\n\n' +
+        '  ' + work.title + '\n' +
+        '  ' + work.medium + ', ' + work.dimensions + '\n\n' +
+        'Could you let me know if it\'s still available and the asking price?\n\n' +
+        'Thank you,\n[Your name]';
+
+      const inquireBtn = work.originalAvailable
+        ? '<a href="mailto:maxojkb@proton.me?subject=' + encodeURIComponent(inquireSubject) + '&body=' + encodeURIComponent(inquireBody) + '" class="btn">Inquire</a>'
+        : '<span class="btn btn-ghost">Inquire</span>';
+
+      const item = document.createElement("div");
+      item.className = "work-item";
+      item.style.animationDelay = `${0.04 + i * 0.05}s`;
+      item.innerHTML = `
+        <div class="work-image">
+          <img src="${work.image}" alt="${work.title}" loading="lazy" />
+        </div>
+        <div class="work-meta">
+          <span class="work-title">${work.title}</span>
+          <span class="work-info">${work.medium}, ${work.dimensions}</span>
+        </div>
+        <div class="work-actions">
+          ${inquireBtn}
+        </div>
+        <div id="${mountId}"></div>
+      `;
+      grid.appendChild(item);
+    });
+
+  //   // ── Load Shopify SDK once, then init all products ───────────────────────
+  //   (function () {
+  //     var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+
+  //     function loadScript() {
+  //       var script = document.createElement('script');
+  //       script.async = true;
+  //       script.src = scriptURL;
+  //       document.head.appendChild(script);
+  //       script.onload = initShopify;
+  //     }
+
+  //     function initShopify() {
+  //       var client = ShopifyBuy.buildClient({
+  //         domain: SHOPIFY_DOMAIN,
+  //         storefrontAccessToken: SHOPIFY_TOKEN,
+  //       });
+
+  //       ShopifyBuy.UI.onReady(client).then(function (ui) {
+  //         // Create a hidden component for each product so the cart is ready
+  //         WORKS.forEach(function (work) {
+  //           var mountId = 'shopify-mount-' + work.shopifyProductId;
+  //           var node = document.getElementById(mountId);
+  //           if (!node) return;
+
+  //           ui.createComponent('product', {
+  //             id: work.shopifyProductId,
+  //             node: node,
+  //             options: {
+  //               product: {
+  //                 buttonDestination: 'cart',
+  //                 contents: { button: true },
+  //                 text: { button: 'Add to cart' },
+  //               },
+  //               cart: {
+  //                 text: { total: 'Subtotal', button: 'Checkout' },
+  //               },
+  //             },
+  //           }).then(function (component) {
+  //             componentMap[work.shopifyProductId] = component;
+  //           });
+  //         });
+
+  //         // Wire up our "Buy Print" buttons to trigger Shopify's add-to-cart
+  //         document.querySelectorAll('.btn-buy-print').forEach(function (btn) {
+  //           btn.addEventListener('click', function () {
+  //             var productId = btn.getAttribute('data-product-id');
+  //             var component = componentMap[productId];
+  //             if (component) {
+  //               // Add to cart and open the cart drawer
+  //               component.cart.open();
+  //               component.model.selectedVariant &&
+  //                 component.props.client.checkout
+  //                   .addLineItems(component.cart.model.id, [{
+  //                     variantId: component.model.selectedVariant.id,
+  //                     quantity: 1,
+  //                   }])
+  //                   .then(function () { component.cart.open(); });
+  //             }
+  //           });
+  //         });
+  //       });
+  //     }
+
+  //     if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+  //       initShopify();
+  //     } else {
+  //       loadScript();
+  //     }
+  //   })();
+  // </script>
 
 </body>
 </html>
