@@ -18,7 +18,7 @@
       background: var(--bg);
       color: var(--ink);
       font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
+      font-size: 16px;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
@@ -35,15 +35,13 @@
     }
 
     .nav-logo {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
+      font-size: 16px;
       text-decoration: none;
       color: var(--ink);
     }
 
     .nav-work {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
+      font-size: 16px;
       text-decoration: none;
       color: var(--ink-light);
       transition: color 0.15s;
@@ -66,19 +64,19 @@
     }
 
     .cv-name {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
       line-height: 1.6;
     }
 
     .cv-birth {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.6;
       margin-bottom: 16px;
     }
 
     .cv-email {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--ink);
       text-decoration: none;
       display: block;
@@ -92,11 +90,13 @@
     }
 
     .cv-label {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--ink);
       margin-bottom: 18px;
-      font-style: italic;
     }
 
     .cv-row {
@@ -110,13 +110,12 @@
     .cv-row:last-child { margin-bottom: 0; }
 
     .cv-year {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--ink);
-      padding-top: 0;
     }
 
     .cv-detail {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.6;
       color: var(--ink);
     }
@@ -125,32 +124,13 @@
 
     .cv-detail .venue {
       display: block;
+      font-size: 16px;
       color: var(--ink);
-      font-size: 14px;
     }
-
-    footer {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 24px 40px;
-      border-top: 1px solid var(--rule);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    footer span, footer a {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 14px;
-      color: var(--ink-light);
-      text-decoration: none;
-    }
-
-    footer a:hover { color: var(--ink); }
 
     @media (max-width: 680px) {
       nav { padding: 18px 20px; }
       main { padding-left: 20px; padding-right: 20px; }
-      footer { padding: 20px; }
     }
   </style>
 </head>
@@ -176,7 +156,7 @@
         <span class="cv-year">2018</span>
         <div class="cv-detail">
           <em>"Waiting for Fireworks."</em>
-          <span class="venue">Glimmer Train, Issue 103, Fall 2018</span>
+          <span class="venue">Glimmer Train, Issue 103</span>
         </div>
       </div>
 
@@ -184,7 +164,7 @@
         <span class="cv-year">2018</span>
         <div class="cv-detail">
           <em>"A Constitution for a Young Artist."</em>
-          <span class="venue">Glimmer Train, Bulletin 132, January 2018</span>
+          <span class="venue">Glimmer Train, Bulletin 132</span>
         </div>
       </div>
 
@@ -192,7 +172,7 @@
         <span class="cv-year">2017</span>
         <div class="cv-detail">
           <em>"Big Picture Kind of Guy."</em>
-          <span class="venue">YoungArts Writer's Anthology, 2017</span>
+          <span class="venue">YoungArts Writer's Anthology</span>
         </div>
       </div>
     </div>
@@ -212,7 +192,7 @@
         <span class="cv-year">2017</span>
         <div class="cv-detail">
           First Place, Short Story Award for New Writers
-          <span class="venue">Glimmer Train, Sept/Oct 2017</span>
+          <span class="venue">Glimmer Train</span>
         </div>
       </div>
 
@@ -227,7 +207,7 @@
         <span class="cv-year">2017</span>
         <div class="cv-detail">
           Finalist, Short Story Award for New Writers
-          <span class="venue">Glimmer Train, Jan/Feb 2017</span>
+          <span class="venue">Glimmer Train</span>
         </div>
       </div>
 
@@ -235,7 +215,7 @@
         <span class="cv-year">2016</span>
         <div class="cv-detail">
           Finalist, Short Story Award for New Writers
-          <span class="venue">Glimmer Train, Jan/Feb 2016</span>
+          <span class="venue">Glimmer Train</span>
         </div>
       </div>
 
@@ -243,7 +223,7 @@
         <span class="cv-year">2016</span>
         <div class="cv-detail">
           Honorable Mention, Short Fiction
-          <span class="venue">New Millennium Writings Awards 42, Oct 2016</span>
+          <span class="venue">New Millennium Writings Awards 42</span>
         </div>
       </div>
     </div>
@@ -261,11 +241,6 @@
     </div>
 
   </main>
-
-  <footer>
-    <span>© 2025 maxojkb</span>
-    <a href="index.html">← work</a>
-  </footer>
 
 </body>
 </html>
