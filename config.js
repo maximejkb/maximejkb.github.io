@@ -8,7 +8,7 @@ const WORKS = [
     dimensions: '8" × 11"',
     image: "images/work-01.jpg",
     originalAvailable: true,
-    shopifyProductId: "REPLACE_WITH_PRODUCT_ID", // replace with each product's ID from Shopify
+    shopifyProductId: "maxojkb-test-print", // replace with each product's ID from Shopify
   },
   {
     title: "Untitled II",

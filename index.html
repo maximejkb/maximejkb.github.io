@@ -198,93 +198,25 @@
       const item = document.createElement("div");
       item.className = "work-item";
       item.style.animationDelay = `${0.04 + i * 0.05}s`;
-      item.innerHTML = `
-        <div class="work-image">
-          <img src="${work.image}" alt="${work.title}" loading="lazy" />
-        </div>
-        <div class="work-meta">
-          <span class="work-title">${work.title}</span>
-          <span class="work-info">${work.medium}, ${work.dimensions}</span>
-        </div>
-        <div class="work-actions">
-          ${inquireBtn}
-        </div>
-        <div id="${mountId}"></div>
-      `;
+      item.innerHTML =
+        '<div class="work-image">' +
+          '<img src="' + work.image + '" alt="' + work.title + '" loading="lazy" />' +
+        '</div>' +
+        '<div class="work-meta">' +
+          '<span class="work-title">' + work.title + '</span>' +
+          '<span class="work-info">' + work.medium + ', ' + work.dimensions + '</span>' +
+        '</div>' +
+        '<div class="work-actions">' +
+          '<a href="https://maxojkb.myshopify.com/products/' + work.shopifyProductId + '" class="btn" target="_blank" rel="noopener noreferrer">Buy Print</a>' + 
+          inquireBtn +
+          
+        '</div>' +
+        '<div id="' + mountId + '" class="shopify-mount"></div>';
+
       grid.appendChild(item);
     });
 
-  //   // ── Load Shopify SDK once, then init all products ───────────────────────
-  //   (function () {
-  //     var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-
-  //     function loadScript() {
-  //       var script = document.createElement('script');
-  //       script.async = true;
-  //       script.src = scriptURL;
-  //       document.head.appendChild(script);
-  //       script.onload = initShopify;
-  //     }
-
-  //     function initShopify() {
-  //       var client = ShopifyBuy.buildClient({
-  //         domain: SHOPIFY_DOMAIN,
-  //         storefrontAccessToken: SHOPIFY_TOKEN,
-  //       });
-
-  //       ShopifyBuy.UI.onReady(client).then(function (ui) {
-  //         // Create a hidden component for each product so the cart is ready
-  //         WORKS.forEach(function (work) {
-  //           var mountId = 'shopify-mount-' + work.shopifyProductId;
-  //           var node = document.getElementById(mountId);
-  //           if (!node) return;
-
-  //           ui.createComponent('product', {
-  //             id: work.shopifyProductId,
-  //             node: node,
-  //             options: {
-  //               product: {
-  //                 buttonDestination: 'cart',
-  //                 contents: { button: true },
-  //                 text: { button: 'Add to cart' },
-  //               },
-  //               cart: {
-  //                 text: { total: 'Subtotal', button: 'Checkout' },
-  //               },
-  //             },
-  //           }).then(function (component) {
-  //             componentMap[work.shopifyProductId] = component;
-  //           });
-  //         });
-
-  //         // Wire up our "Buy Print" buttons to trigger Shopify's add-to-cart
-  //         document.querySelectorAll('.btn-buy-print').forEach(function (btn) {
-  //           btn.addEventListener('click', function () {
-  //             var productId = btn.getAttribute('data-product-id');
-  //             var component = componentMap[productId];
-  //             if (component) {
-  //               // Add to cart and open the cart drawer
-  //               component.cart.open();
-  //               component.model.selectedVariant &&
-  //                 component.props.client.checkout
-  //                   .addLineItems(component.cart.model.id, [{
-  //                     variantId: component.model.selectedVariant.id,
-  //                     quantity: 1,
-  //                   }])
-  //                   .then(function () { component.cart.open(); });
-  //             }
-  //           });
-  //         });
-  //       });
-  //     }
-
-  //     if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-  //       initShopify();
-  //     } else {
-  //       loadScript();
-  //     }
-  //   })();
-  // </script>
+  </script>
 
 </body>
 </html>
