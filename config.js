@@ -5,7 +5,7 @@ const WORKS = [
     dimensions: '5" × 7"',
     image: "images/self-portrait.jpg",
     originalAvailable: true,
-    shopifyProductId: "maxojkb-test-print", 
+    shopifyProductId: "", 
   },
     {
     title: "Still life of fish",
@@ -40,13 +40,13 @@ const WORKS = [
     shopifyProductId: "", 
   },
     {
-    title: "Untitled Grisaille i",
-    medium: "Oil on canvas panel",
-    dimensions: '5" × 7"',
+    title: "From the corner table at Caffe Reggio",
+    medium: "Black & white film",
+    dimensions: '35mm',
     category: "photography",
-    image: "images/grisaille.JPG",
+    image: "images/corner table.PNG",
     originalAvailable: true,
-    shopifyProductId: "", 
+    shopifyProductId: "the-corner-table-print", 
   },
   
 ];
