@@ -49,7 +49,33 @@
 
     .nav-info:hover { color: var(--ink); }
 
-    main { padding-top: 72px; }
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      position: fixed;
+      top: 65px; left: 0; right: 0;
+      z-index: 99;
+      display: flex;
+      gap: 28px;
+      padding: 12px 40px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .filter-btn {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16px;
+      background: none;
+      border: none;
+      color: var(--ink-light);
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active { color: var(--ink); }
+
+    main { padding-top: 112px; }
 
     .grid {
       display: grid;
@@ -67,21 +93,6 @@
 
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* .work-image {
-      width: 100%;
-      aspect-ratio: 4/5;
-      overflow: hidden;
-      background: #edeae4;
-      margin-bottom: 14px;
-    }
-
-    .work-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.3s;
-    } */
-
     .work-image {
       overflow: hidden;
       background: #e8e4dc;
@@ -93,11 +104,11 @@
       object-fit: unset;
       display: block;
       transition: opacity 0.3s;
-    } 
+    }
 
     .work-item:hover .work-image img { opacity: 0.9; }
 
-    .work-meta { margin-bottom: 12px; }
+    .work-meta { margin-top: 14px; margin-bottom: 12px; }
 
     .work-title {
       font-size: 16px;
@@ -143,7 +154,6 @@
       color: var(--ink-light);
     }
 
-    /* Hide Shopify's rendered components entirely — we use our own buttons */
     [id^='shopify-mount-'] { display: none !important; }
 
     footer {
@@ -164,6 +174,8 @@
 
     @media (max-width: 680px) {
       nav { padding: 18px 20px; }
+      .filter-bar { top: 57px; padding: 10px 20px; gap: 20px; }
+      main { padding-top: 104px; }
       .grid { grid-template-columns: 1fr; }
       .work-item { padding: 28px 20px; border-right: none !important; }
       footer { padding: 20px; flex-direction: column; gap: 6px; }
@@ -177,24 +189,24 @@
     <a href="cv.html" class="nav-info">INFO</a>
   </nav>
 
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="painting">Paintings</button>
+    <button class="filter-btn" data-filter="photography">Photography</button>
+  </div>
+
   <main>
     <div class="grid" id="grid"></div>
   </main>
 
   <footer>
     <span>© 2026</span>
-    <a href="mailto:maxojkb@proton.me">maxojkb@proton.me</a>
   </footer>
 
-  <script src="config.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="config.js"></script>
   <script>
-    // ── Build the grid from config ──────────────────────────────────────────
     const grid = document.getElementById("grid");
-    const componentMap = {}; // productId → Shopify UI component, populated after SDK loads
 
     WORKS.forEach((work, i) => {
-      const mountId = `shopify-mount-${work.shopifyProductId}`;
-
       const inquireSubject = 'Inquiry: ' + work.title;
       const inquireBody =
         'Hi Maxime,\n\n' +
@@ -204,12 +216,22 @@
         'Could you let me know if it\'s still available and the asking price?\n\n' +
         'Thank you,\n[Your name]';
 
-      const inquireBtn = work.originalAvailable
-        ? '<a href="mailto:maxojkb@proton.me?subject=' + encodeURIComponent(inquireSubject) + '&body=' + encodeURIComponent(inquireBody) + '" class="btn">Own the Original</a>'
-        : '<span class="btn btn-ghost">Inquire</span>';
+      const isPhoto = (work.category === 'photography');
+      const hasShopifyId = work.shopifyProductId && work.shopifyProductId.trim() !== '';
+
+      const buyPrintBtn = hasShopifyId
+        ? '<a href="https://maxojkb.myshopify.com/products/' + work.shopifyProductId + '" class="btn" target="_blank" rel="noopener noreferrer">Buy Print</a>'
+        : '<span class="btn btn-ghost">Buy Print</span>';
+
+      const inquireBtn = isPhoto
+        ? ''
+        : work.originalAvailable
+          ? '<a href="mailto:maxojkb@proton.me?subject=' + encodeURIComponent(inquireSubject) + '&body=' + encodeURIComponent(inquireBody) + '" class="btn">Own the Original</a>'
+          : '<span class="btn btn-ghost">Inquire</span>';
 
       const item = document.createElement("div");
       item.className = "work-item";
+      item.dataset.category = work.category || "painting";
       item.style.animationDelay = `${0.04 + i * 0.05}s`;
       item.innerHTML =
         '<div class="work-image">' +
@@ -220,16 +242,41 @@
           '<span class="work-info">' + work.medium + ', ' + work.dimensions + '</span>' +
         '</div>' +
         '<div class="work-actions">' +
-          '<a href="https://maxojkb.myshopify.com/products/' + work.shopifyProductId + '" class="btn" target="_blank" rel="noopener noreferrer">Buy Print</a>' + 
+          buyPrintBtn +
           inquireBtn +
-          
-        '</div>' +
-        '<div id="' + mountId + '" class="shopify-mount"></div>';
+        '</div>';
+
+      // hide non-paintings on initial load
+      if ((work.category || 'painting') !== 'painting') {
+        item.style.display = 'none';
+      }
 
       grid.appendChild(item);
     });
 
-  </script>
+    // fix borders for initially visible items
+    function fixBorders() {
+      const visible = [...document.querySelectorAll('.work-item')].filter(i => i.style.display !== 'none');
+      visible.forEach((item, idx) => {
+        item.style.borderRight = (idx % 2 === 0) ? '1px solid var(--rule)' : '';
+      });
+    }
+    fixBorders();
+
+    // ── Filter logic ──────────────────────────────────────────────────────
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.work-item').forEach(item => {
+          item.style.display = item.dataset.category === filter ? '' : 'none';
+        });
+
+        fixBorders();
+      });
+    });  </script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ const WORKS = [
     dimensions: '5" × 7"',
     image: "images/fish.JPG",
     originalAvailable: true,
-    shopifyProductId: "maxojkb-test-print", 
+    shopifyProductId: "", 
   },
     {
     title: "Still life of Two Oranges",
@@ -21,7 +21,7 @@ const WORKS = [
     dimensions: '5" × 7"',
     image: "images/oranges.JPG",
     originalAvailable: true,
-    shopifyProductId: "maxojkb-test-print", 
+    shopifyProductId: "", 
   },
     {
     title: "We Were Told There Would Be Shooting Stars",
@@ -29,7 +29,7 @@ const WORKS = [
     dimensions: '5" × 7"',
     image: "images/shooting-stars.JPG",
     originalAvailable: true,
-    shopifyProductId: "maxojkb-test-print", 
+    shopifyProductId: "", 
   },
     {
     title: "Untitled Grisaille i",
@@ -37,7 +37,16 @@ const WORKS = [
     dimensions: '5" × 7"',
     image: "images/grisaille.JPG",
     originalAvailable: true,
-    shopifyProductId: "maxojkb-test-print", 
+    shopifyProductId: "", 
+  },
+    {
+    title: "Untitled Grisaille i",
+    medium: "Oil on canvas panel",
+    dimensions: '5" × 7"',
+    category: "photography",
+    image: "images/grisaille.JPG",
+    originalAvailable: true,
+    shopifyProductId: "", 
   },
   
 ];
