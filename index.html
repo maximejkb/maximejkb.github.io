@@ -67,7 +67,7 @@
 
     @keyframes fadeIn { to { opacity: 1; } }
 
-    .work-image {
+    /* .work-image {
       width: 100%;
       aspect-ratio: 4/5;
       overflow: hidden;
@@ -80,7 +80,20 @@
       object-fit: cover;
       display: block;
       transition: opacity 0.3s;
+    } */
+
+    .work-image {
+      overflow: hidden;
+      background: #e8e4dc;
     }
+
+    .work-image img {
+      width: 100%;
+      height: auto;
+      object-fit: unset;
+      display: block;
+      transition: opacity 0.3s;
+    } 
 
     .work-item:hover .work-image img { opacity: 0.9; }
 
