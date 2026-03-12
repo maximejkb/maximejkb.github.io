@@ -46,7 +46,7 @@ const WORKS = [
     category: "photography",
     image: "images/immi.png",
     originalAvailable: true,
-    shopifyProductId: "immi-print", 
+    shopifyProductId: "", 
   },
         {
     title: "Peace & Quiet",
