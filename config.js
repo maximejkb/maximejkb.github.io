@@ -39,6 +39,25 @@ const WORKS = [
     originalAvailable: true,
     shopifyProductId: "", 
   },
+      {
+    title: "Immi in L.E.S.",
+    medium: "Black & white film",
+    dimensions: '35mm',
+    category: "photography",
+    image: "images/immi.png",
+    originalAvailable: true,
+    shopifyProductId: "immi-print", 
+  },
+        {
+    title: "Peace & Quiet",
+    medium: "Black & white film",
+    dimensions: '35mm',
+    category: "photography",
+    image: "images/peace and quiet.png",
+    originalAvailable: true,
+    shopifyProductId: "peace-and-quiet-print", 
+  },
+  
     {
     title: "From the corner table at Caffe Reggio",
     medium: "Black & white film",
@@ -48,5 +67,5 @@ const WORKS = [
     originalAvailable: true,
     shopifyProductId: "the-corner-table-print", 
   },
-  
+
 ];
