@@ -55,7 +55,7 @@ const WORKS = [
     category: "photography",
     image: "images/peace and quiet.png",
     originalAvailable: true,
-    shopifyProductId: "peace-and-quiet-print", 
+    shopifyProductId: "peace-quiet-print", 
   },
   
     {
