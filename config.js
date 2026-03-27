@@ -1,5 +1,21 @@
 const WORKS = [
   {
+    title: "Figure drawing I",
+    medium: "Graphite on paper",
+    dimensions: '8.5" × 11"',
+    image: "images/figure i.png",
+    originalAvailable: true,
+    shopifyProductId: "figure-drawing-i-poster", 
+  },
+  {
+    title: "Gesture drawing I",
+    medium: "Graphite on paper",
+    dimensions: '8.5" × 11"',
+    image: "images/gesture i.png",
+    originalAvailable: true,
+    shopifyProductId: "gesture-drawings-i-poster", 
+  },
+  {
     title: "Self-portrait sketch",
     medium: "Oil on canvas panel",
     dimensions: '5" × 7"',
