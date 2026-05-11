@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>maxojkb — info</title>
-  <title>MAXOJKB</title>
 
   <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
@@ -18,8 +17,9 @@
     :root {
       --bg: #fdfcfb;
       --ink: #1a1814;
-      --ink-light: #4e4d4c;
+      --ink-light: #9a9690;
       --rule: #e6e3dd;
+      --sidebar-w: 160px;
     }
 
     body {
@@ -33,36 +33,63 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAV ── */
-    nav {
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 40px 36px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 40px;
+      flex-direction: column;
+      background: var(--bg);
+      z-index: 100;
     }
 
-    .nav-logo {
+    .sidebar-name {
       font-size: 16px;
-      text-decoration: none;
+      letter-spacing: 0.06em;
       color: var(--ink);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 28px;
     }
 
-    .nav-work {
-      font-size: 16px;
-      text-decoration: none;
+    .sidebar-section {
+      margin-bottom: 16px;
+    }
+
+    .sidebar-section-label {
+      display: block;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 15px;
+      letter-spacing: 0.08em;
       color: var(--ink-light);
+      margin-bottom: 6px;
+      text-decoration: none;
       transition: color 0.15s;
     }
 
-    .nav-work:hover { color: var(--ink); }
+    .sidebar-section-label.active { color: var(--ink); }
+    a.sidebar-section-label:hover { color: var(--ink); }
 
-    /* ── CARD STAGE ── */
+    .sidebar-ig {
+      margin-top: auto;
+      font-size: 15px;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .sidebar-ig:hover { color: var(--ink); }
+
+    /* ── CONTENT ── */
     .stage {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px;
+      padding: 40px calc(var(--sidebar-w) + 40px) 40px 40px;
     }
 
     .card-wrap {
@@ -106,15 +133,6 @@
       transform: rotateY(180deg);
     }
 
-    .card-back .card-back-header {
-      font-size: 14px;
-      color: var(--ink);
-      line-height: 1.6;
-      margin-bottom: 12px;
-      padding-left: 0px; /* aligns with contact row values (20px label + 12px gap) */
-    }
-
-    /* ── FRONT ── */
     .card-front .name {
       font-size: 15px;
       font-weight: 400;
@@ -128,15 +146,6 @@
       line-height: 1.7;
     }
 
-    .card-front .bio-line {
-      font-size: 14px;
-      color: var(--ink-light);
-      line-height: 1.6;
-      margin-bottom: 12px;
-      padding-left: 0px; /* aligns with contact row values (20px label + 12px gap) */
-    }
-
-    /* ── BACK ── */
     .card-back .contact-row {
       display: grid;
       grid-template-columns: 20px 1fr;
@@ -164,10 +173,9 @@
       text-underline-offset: 3px;
     }
 
-    /* ── HINT ── */
     .hint {
       text-align: center;
-      padding-bottom: 32px;
+      padding: 0 calc(var(--sidebar-w) + 40px) 32px 40px;
       font-size: 13px;
       color: var(--ink-light);
       letter-spacing: 0.03em;
@@ -175,12 +183,37 @@
       animation: fadeHint 0.5s ease 0.8s forwards;
     }
 
-    @keyframes fadeHint {
-      to { opacity: 1; }
-    }
+    @keyframes fadeHint { to { opacity: 1; } }
 
-    @media (max-width: 480px) {
-      nav { padding: 20px; }
+    /* ── MOBILE ── */
+    @media (max-width: 680px) {
+      .sidebar {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .sidebar-name { margin-bottom: 10px; }
+
+      .sidebar-section { margin-bottom: 0; }
+
+      a.sidebar-section-label {
+        display: block;
+        position: absolute;
+        top: 18px;
+        right: 20px;
+      }
+
+      .sidebar-ig { display: none; }
+
+      .stage { padding: 100px 20px 40px; }
+
+      .hint { padding: 0 20px 32px; }
+
       .card-wrap { width: 300px; height: 180px; }
       .card-front, .card-back { padding: 28px; }
     }
@@ -188,10 +221,19 @@
 </head>
 <body>
 
-  <nav>
-    <a href="https://www.instagram.com/maxojkb" target="_blank" rel="noopener" class="nav-logo">@maxojkb</a>
-    <a href="index.html" class="nav-work">WORK</a>
-  </nav>
+  <aside class="sidebar">
+    <a href="index.html" class="sidebar-name">MAXOJKB</a>
+
+    <div class="sidebar-section">
+      <a href="index.html" class="sidebar-section-label">WORK</a>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-section-label active">INFO</span>
+    </div>
+
+    <a href="https://www.instagram.com/maxojkb" target="_blank" rel="noopener" class="sidebar-ig">@maxojkb</a>
+  </aside>
 
   <div class="stage">
     <div class="card-wrap" id="cardWrap">
@@ -199,18 +241,12 @@
 
         <div class="card-front">
           <p class="name">MAX[O] J. K*****-B******</p>
-          <!-- <p class="bio-line">Brooklyn-based writer, painter, photographer.</p> -->
           <p class="detail">
             b. 1999, New York, NY<br>
           </p>
         </div>
 
         <div class="card-back">
-          <!-- <div class="contact-row">
-            <span class="label">Bio</span>
-            NYC-based writer, painter, photographer.
-          </div> -->
-          <!-- <p class="card-back-header">Brooklyn-based writer, painter, photographer. </p> -->
           <div class="contact-row">
             <span class="label">E</span>
             <a href="mailto:maxojkb@proton.me">maxojkb@proton.me</a>
@@ -241,7 +277,6 @@
       hint.style.opacity = '0';
     });
   </script>
-  
 
 </body>
 </html>
