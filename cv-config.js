@@ -1,6 +1,6 @@
 const CV = {
 
-  name: "MAXOJKB",
+  name: "MAX[O] J. K***-B***",
   born: "1999",
   location: "New York, NY",
   basedIn: "New York, NY",
@@ -19,6 +19,7 @@ const CV = {
   ],
 
   groupExhibitions: [
+    { year: "2026", text: "<em>Juried Group Show</em> — Greenpoint Gallery, New York, NY" },
     { year: "2026", text: "<em>Student Salon — Garin Baker Painting Class</em>, Phyllis Harriman Mason Gallery, Art Students League of New York, New York, NY" },
     { year: "2026", text: "<em>Student Salon — Garin Baker Painting Class</em>, Phyllis Harriman Mason Gallery, Art Students League of New York, New York, NY" },
   ],
