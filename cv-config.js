@@ -19,8 +19,8 @@ const CV = {
   ],
 
   groupExhibitions: [
-    { year: "2026", text: "<em>Juried Group Show</em> — Greenpoint Gallery, New York, NY" },
-    { year: "2026", text: "<em>Student Salon — Garin Baker Painting Class</em>, Phyllis Harriman Mason Gallery, Art Students League of New York, New York, NY" },
+    { year: "2026", text: "<em>Juried Group Show</em> — Greenpoint Gallery, Brooklyn, NY" },
+    { year: "2026", text: "<em>Student Salon — Garin Baker Drawing Class</em>, Phyllis Harriman Mason Gallery, Art Students League of New York, New York, NY" },
     { year: "2026", text: "<em>Student Salon — Garin Baker Painting Class</em>, Phyllis Harriman Mason Gallery, Art Students League of New York, New York, NY" },
   ],
 
