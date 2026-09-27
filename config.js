@@ -101,7 +101,7 @@ const WORKS = [
     title: "Girl sleeping",
     medium: "Oil on canvas",
     dimensions: '16" × 20"',
-    image: "images/IMG_5464.JPG",
+    image: "images/IMG_5464.jpg",
     originalAvailable: true,
     shopifyProductId: "", 
   },
