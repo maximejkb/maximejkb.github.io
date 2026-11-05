@@ -86,7 +86,7 @@
     }
 
     .cv-content {
-      max-width: 680px;
+      max-width: 760px;
       margin: 0 auto;
     }
 
@@ -219,20 +219,20 @@
     main.innerHTML =
       '<div class="cv-header">' +
         '<p class="cv-name">' + CV.name + '</p>' +
-        '<p class="cv-born">b. ' + CV.born + ', ' + CV.location + '</p>' +
+        '<p class="cv-born">' + (CV.role ? CV.role + ' ' : '') + '(b. ' + CV.born + ', ' + CV.location + ')</p>' +
         '<a href="mailto:' + CV.email + '">' + CV.email + '</a>' +
       '</div>' +
       (CV.statement ? '<div class="cv-section"><p class="cv-statement">' + CV.statement + '</p></div>' : '');
 
     // CV sections in display order
     const sections = [
-      { key: 'soloExhibitions',      label: 'Solo Exhibitions' },
+      { key: 'education',            label: 'Education' },
+      { key: 'publications',         label: 'Publications' },
       { key: 'groupExhibitions',     label: 'Group Exhibitions' },
       { key: 'awardsAndResidencies', label: 'Awards & Residencies' },
+      { key: 'writingHonors',        label: 'Awards & Honors' },
+      { key: 'soloExhibitions',      label: 'Solo Exhibitions' },
       { key: 'press',                label: 'Press' },
-      { key: 'publications',         label: 'Publications' },
-      { key: 'writingHonors',        label: 'Writing Honors' },
-      { key: 'education',            label: 'Education' },
     ];
 
     sections.forEach(function(section) {

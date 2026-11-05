@@ -189,3 +189,28 @@ const WORKS = [
     shopifyProductId: "", 
   },
 ];
+
+// Writing tab. Newest first. Add a new piece by copying one block.
+const WRITING = [
+  {
+    title: "Notes from the Blue Notebook",
+    publication: "ExPat Press",
+    date: "November 4, 2026",
+    url: "https://expatpress.com/notes-from-the-blue-notebook-maxime-kawawa-beaudan/",
+  },
+  {
+    title: "Waiting for Fireworks",
+    publication: "Glimmer Train, Issue 103",
+    date: "Fall 2018",
+  },
+  {
+    title: "A Constitution for a Young Artist",
+    publication: "Glimmer Train, Bulletin 132",
+    date: "January 2018",
+  },
+  {
+    title: "Big Picture Kind of Guy",
+    publication: "YoungArts Writer's Anthology",
+    date: "2017",
+  },
+];

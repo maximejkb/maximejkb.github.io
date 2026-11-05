@@ -28,6 +28,8 @@
       font-family: 'Times New Roman', Times, serif;
       font-size: 16px;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -105,6 +107,7 @@
 
     /* ── MAIN ── */
     main {
+      flex: 1;
       padding: 60px calc(var(--sidebar-w) + 60px) 0 60px;
     }
 
@@ -136,6 +139,12 @@
     }
 
     .work-item:hover .work-image img { opacity: 0.9; }
+
+    /* ── WRITING LIST ── */
+    .writing-item { padding: 28px 0; }
+    .writing-item a.work-title { color: var(--ink); transition: color 0.15s; }
+    .writing-item a.work-title:hover { color: var(--ink-light); }
+    .writing-item span.work-title { text-decoration: none; }
 
     .work-meta { margin-top: 14px; margin-bottom: 12px; }
 
@@ -231,6 +240,7 @@
       main { padding: 100px 20px 0 20px; }
 
       .work-item { padding: 48px 0; }
+      .writing-item { padding: 22px 0; }
 
       footer { padding: 32px 20px; }
     }
@@ -246,6 +256,7 @@
       <div class="sidebar-filters">
         <button class="filter-btn active" data-filter="painting">Paintings</button>
         <button class="filter-btn" data-filter="sketches">Sketches</button>
+        <button class="filter-btn" data-filter="writing">Writing</button>
       </div>
     </div>
 
@@ -310,6 +321,21 @@
         item.style.display = 'none';
       }
 
+      grid.appendChild(item);
+    });
+
+    // ── Writing list (hidden until the Writing tab is selected) ───────────
+    (typeof WRITING !== "undefined" ? WRITING : []).forEach((piece, i) => {
+      const item = document.createElement("div");
+      item.className = "work-item writing-item";
+      item.dataset.category = "writing";
+      item.style.display = "none";
+      item.style.animationDelay = `${0.04 + i * 0.05}s`;
+      item.innerHTML =
+        (piece.url
+          ? '<a class="work-title" href="' + piece.url + '" target="_blank" rel="noopener noreferrer">' + piece.title + '</a>'
+          : '<span class="work-title">' + piece.title + '</span>') +
+        '<span class="work-info">' + piece.publication + ', ' + piece.date + '</span>';
       grid.appendChild(item);
     });
 

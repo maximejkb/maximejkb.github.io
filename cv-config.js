@@ -1,6 +1,7 @@
 const CV = {
 
-  name: "MAX[O] J. K***-B***",
+  name: "Maxime Kawawa-Beaudan",
+  role: "Writer & painter",
   born: "1999",
   location: "New York, NY",
   basedIn: "New York, NY",
@@ -33,6 +34,7 @@ const CV = {
   ],
 
   publications: [
+    { year: "2026", text: "<a href=\"https://expatpress.com/notes-from-the-blue-notebook-maxime-kawawa-beaudan/\" target=\"_blank\" rel=\"noopener noreferrer\">\"Notes from the Blue Notebook.\"</a> <em>ExPat Press</em>, November 4, 2026." },
     { year: "2018", text: "\"Waiting for Fireworks.\" <em>Glimmer Train</em>, Issue 103, Fall 2018." },
     { year: "2018", text: "\"A Constitution for a Young Artist.\" <em>Glimmer Train</em>, Bulletin 132, January 2018." },
     { year: "2017", text: "\"Big Picture Kind of Guy.\" <em>YoungArts Writer's Anthology</em>, 2017." },
