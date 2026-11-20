@@ -1,0 +1,109 @@
+// reading list -- shows up in the start menu under "reading list".
+// lines starting with // are ignored. titles follow MLA:
+//   *Title*, Author        -> italic: books, plays, long poems, films
+//   "Title," Author        -> quotes: stories, essays, short poems, articles, videos
+// add a link and/or a note after a |   (both optional):
+//   *Title*, Author | https://link | why you like it
+//   *Title*, Author | why you like it          <- a note with no link works too
+// # a heading     > a paragraph of text     --- a dividing line
+
+> a non-exhaustive list of my favorite books, essays, videos, poems, stories, etc. always taking reccs just shoot me a message! 
+> work in progress, last catalogued nov 2026.
+
+---
+
+# Books
+*Just Kids*, Patti Smith | duh. wrecked me
+*The Year of Magical Thinking*, Joan Didion 
+*Empire of Pain*, Patrick Radden Keefe | incredible reporting from one of my favorite authors
+*Endurance*, Alfred Lansing | amazing true story of Ernest Shackleton's voyage
+*Dreams from My Father*, Barack Obama | my copy got stolen out of my backpack side pocket 50 pages from the end but I think he becomes president or something
+*Working Girl: On Selling Art and Selling Sex*, Sophia Giovannitti 
+*Blue Nights*, Joan Didion
+*Say Nothing*, Patrick Radden Keefe
+*A Book of Common Prayer*, Joan Didion
+*The Goldfinch*, Donna Tartt
+*The Right Stuff*, Tom Wolfe
+*The Road*, Cormac McCarthy
+*The Odyssey*, Homer
+*The Complete Calvin and Hobbes*, Bill Watterson | grew up on these, wrote one of my first essays on Bill Watterson as a personal hero
+*An Immense World*, Ed Yong | really interesting book about animal perception that highlights how arbitrary the projection of essential reality that our mind constructs from our senses is
+*Blood Meridian*, Cormac McCarthy
+*How to Write an Autobiographical Novel*, Alexander Chee
+*Cherry*, Nico Walker
+*The Bell Jar*, Sylvia Plath
+*Dune*, Frank Herbert
+*Stay True*, Hua Hsu | devastating
+*Stoner*, John Williams 
+*The Power Broker*, Robert A. Caro
+*Palestine 1936*, Oren Kessler 
+*Careless People*, Sarah Wynn-Williams
+*My Year of Rest and Relaxation*, Ottessa Moshfegh
+*The Death of Ivan Ilyich*, Leo Tolstoy
+*Legacy of Ashes: The History of the CIA*, Tim Weiner
+*Foundation*, Isaac Asimov
+*The Gulag Archipelago*, Aleksandr Solzhenitsyn
+*How to Change Your Mind*, Michael Pollan
+*The Chronicles of Narnia*, C. S. Lewis | formative childhood book
+*Eragon*, Christopher Paolini 
+*The Mysterious Benedict Society*, Trenton Lee Stewart
+*When Breath Becomes Air*, Paul Kalanithi
+*The Call of the Wild*, Jack London
+*The Miraculous Journey of Edward Tulane*, Kate DiCamillo
+*Never Let Me Go*, Kazuo Ishiguro
+*Akira*, Katsuhiro Otomo
+*Atlas Shrugged*, Ayn Rand | purely as American mythology and fiction, a great story. 
+*Outlive*, Peter Attia
+*Redwall*, Brian Jacques
+*A Separate Peace*, John Knowles
+*Disgrace*, J. M. Coetzee
+*The Kite Runner*, Khaled Hosseini
+*The Pillars of the Earth*, Ken Follett
+*No Place to Hide*, Glenn Greenwald
+*Educated*, Tara Westover 
+
+# Stories
+"Midair," Frank Conroy | https://www.newyorker.com/magazine/1984/02/27/midair | one of the first short stories I read, think about it often
+"To Build a Fire," Jack London | https://shortstoryamerica.com/pdf_classics/londonj_to_build_a_fire.pdf
+"Gossip," Frank Conroy | https://www.narrativemagazine.com/issues/winter-2006/classics/gossip-frank-conroy
+"Good Country People," Flannery O'Connor
+"A Good Man Is Hard to Find," Flannery O'Connor
+"Little Things," Raymond Carver
+"A Small, Good Thing," Raymond Carver
+"Boys and Girls," Alice Munro
+"Janus," Ann Beattie
+"Hills Like White Elephants," Ernest Hemingway
+"As the Night the Day," Abioseh Nicol
+
+# Essays
+"The Opposite of Loneliness," Marina Keegan | https://yaledailynews.com/articles/keegan-the-opposite-of-loneliness
+"Standing on the Shoulders of Complex Female Characters," Rayne Fisher-Quann | https://internetprincess.substack.com/p/standing-on-the-shoulders-of-complex
+"Notes from the End of Summer," Rayne Fisher-Quann | https://internetprincess.substack.com/p/notes-from-the-end-of-summer
+"OnlyFans and Perpetual Ego Death," Anna Blake | https://nothingseriousbyannablake.substack.com/p/onlyfans-and-perpetual-ego-death
+"Running the Table," Frank Conroy | https://www.narrativemagazine.com/issues/spring-2014/nonfiction/running-table-frank-conroy
+
+
+# Plays
+*Angels in America*, Tony Kushner
+
+# Poems
+"Ulysses," Alfred, Lord Tennyson
+"In Flanders Fields," John McCrae
+"The New Colossus," Emma Lazarus
+"Ainsi tout passe sur la terre," unknown poet
+"Ave Maria," Frank O'Hara
+Matthew 25:34–40 | https://www.biblegateway.com/passage/?search=Matthew%2025%3A34-40&version=NIV
+
+# Videos
+"Live Improvisation at The Kennedy Center," Bobby McFerrin | https://www.youtube.com/watch?v=snFZFw2y9Gk
+"Agony (Live at Melt Festival)," Yung Lean | https://www.youtube.com/watch?v=QKbgsrjaG4w
+*Revenge*, Dreamville | https://www.youtube.com/watch?v=9-9mZLh5XU8
+"Bernard Albertson Tells His Life Story in His Own Words," Bernard Albertson | https://www.youtube.com/watch?v=ERRKmVlCz5A
+"Little Boy Asks Pope Francis: 'Is My Dad in Heaven?'" Arlington Catholic Herald | https://www.youtube.com/watch?v=xL01jmT0MN4
+"Jon Stewart Slams Congress over Benefits for 9/11 First Responders," ABC News | https://www.youtube.com/watch?v=_uYpDC3SRpM
+"Jon Stewart on Crossfire," CNN | https://www.youtube.com/watch?v=aFQFB5YpDZE
+"A Day in the Studio with Hugo Winder-Lind," Hometown Journal | https://www.youtube.com/watch?v=XWKP2UIGo-A
+*China's Van Goghs*, Yu Haibo and Kiki Tianqi Yu | https://www.youtube.com/watch?v=uyiUAagEt2E
+"The Cave: Episode 6 – Vince Staples Freestyle," Kenny Beats | https://www.youtube.com/watch?v=F3GoyamxXt8
+"Largest Oil Painting I Have Ever Made: Full Process," Thomas Minnick | https://www.youtube.com/watch?v=lpW3Ksuhd80
+"Inside the Most Colorful Artist Loft in NYC," Joshua Charow | https://www.youtube.com/watch?v=kBgvOddahzY

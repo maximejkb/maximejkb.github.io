@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maxime Kawawa-Beaudan</title>
+<meta property="og:title" content="Maxime Kawawa-Beaudan">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://maxojkb.com/">
+<meta property="og:image" content="https://maxojkb.com/img/me/1.jpg">
+<link rel="icon" href="favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png">
+<link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+<style>
+  /* bare-html on purpose: default serif, default blue links */
+  body { font-family: "Times New Roman", Times, serif; font-size: 16px; color: #000; background: #fff; margin: 8px 12px 60px; }
+  @media (min-width: 900px) { body > p, body > .sec { max-width: calc(50vw - 50px); } }
+  a { color: #0000ee; }
+  a:visited { color: #551a8b; }
+  ul { margin-top: 4px; }
+  li { margin: 3px 0; }
+  .sec { margin-top: 28px; }
+  .sub { margin: 14px 0 2px; font-style: italic; }
+  .small { font-size: 13px; }
+  .nolink { text-decoration: underline; }
+  .card { margin: 4px 0 0; line-height: 1.35; }
+  hr { border: 0; border-top: 1px solid #999; margin: 30px 0 14px; }
+
+  /* ---------- win98-ish windows ---------- */
+  .win { position: fixed; background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff;
+         box-shadow: 1px 1px 0 #000; font-family: Tahoma, "MS Sans Serif", Geneva, sans-serif; font-size: 12px;
+         resize: both; overflow: hidden; min-width: 160px; min-height: 80px; display: flex; flex-direction: column;
+         padding: 2px; box-sizing: border-box; }
+  .win.min { resize: none; height: auto !important; min-height: 0; }
+  .win.min > :not(.bar) { display: none; }
+  .bar { background: linear-gradient(90deg, #000080, #1084d0); color: #fff; font-weight: bold; padding: 2px 3px 2px 5px;
+         display: flex; align-items: center; gap: 4px; cursor: move; user-select: none; touch-action: none; flex: none; }
+  .win.inactive .bar { background: linear-gradient(90deg, #808080, #b5b5b5); color: #d4d0c8; }
+  .win { resize: none; }
+  .rsz { position: absolute; right: 0; bottom: 0; width: 18px; height: 18px; cursor: nwse-resize; touch-action: none; z-index: 2;
+         background: linear-gradient(135deg, transparent 0 50%, #fff 50% 54%, #808080 54% 60%, transparent 60% 66%, #fff 66% 70%, #808080 70% 76%, transparent 76% 82%, #fff 82% 86%, #808080 86% 92%, transparent 92%); }
+  .win > .btns, .win > .vwrap .btns, .win > .status { padding-right: 20px; }   /* keep buttons clear of the resize corner */
+  @media (pointer: coarse) { .rsz { width: 26px; height: 26px; }
+    .win > .btns, .win > .vwrap .btns, .win > .status { padding-right: 28px; } }
+  .win.min .rsz { display: none; }
+  .bar .t { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar button { width: 16px; height: 14px; padding: 0; font: bold 10px/10px Tahoma, sans-serif; background: #c0c0c0;
+         border: 1px solid; border-color: #fff #404040 #404040 #fff; cursor: pointer; color: #000; }
+  .bar button:active { border-color: #404040 #fff #fff #404040; }
+  .body { flex: 1; background: #fff; margin-top: 2px; border: 2px solid; border-color: #808080 #fff #fff #808080;
+          overflow: auto; display: flex; align-items: center; justify-content: center; min-height: 0; }
+  .body img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .body.txt { display: block; padding: 8px 10px; font-family: "Courier New", monospace; font-size: 13px; line-height: 1.4; }
+  .btns { flex: none; display: flex; gap: 6px; justify-content: flex-end; padding: 5px 2px 3px; }
+  .btn { font: 12px Tahoma, "MS Sans Serif", sans-serif; color: #000 !important; text-decoration: none; background: #c0c0c0;
+         padding: 3px 10px; border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000; white-space: nowrap; }
+  a.btn:active { border-color: #404040 #fff #fff #404040; box-shadow: none; }
+  .btn.ghost { color: #808080 !important; text-shadow: 1px 1px 0 #fff; cursor: default; }
+  .me { cursor: pointer; border: 0; }
+  .body.art { flex-direction: column; align-items: stretch; justify-content: flex-start; }
+  .body.art .pic { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  .body.art .note { flex: none; max-height: 34%; overflow: auto; padding: 8px 10px; border-top: 1px solid #c0c0c0;
+                    font: 15px/1.4 "Times New Roman", Times, serif; white-space: pre-wrap; }
+  .body.art .note:empty { display: none; }
+  .body.art .note b { display: block; margin-bottom: 2px; }
+  .body video { max-width: 100%; max-height: 100%; display: block; background: #000; }
+  .body.vid { background: #000; }
+  .body.list { display: block; padding: 6px 14px 14px; font: 16px/1.35 "Times New Roman", Times, serif; color: #000; }
+  .body.list h4 { margin: 14px 0 2px; font-size: 16px; font-style: italic; font-weight: normal; }
+  .body.list ul { margin: 2px 0; padding-left: 22px; }
+  .body.list li { margin: 3px 0; }
+  .body.list p.intro { margin: 10px 0 0; }
+  .body.list hr { border: 0; border-top: 1px solid #c0c0c0; margin: 18px 0 4px; }
+  /* ---------- desktop icons ---------- */
+  #desk { position: relative; height: 200px; margin-top: 10px; }
+  @media (min-width: 900px) { #desk { max-width: calc(50vw - 50px); } }
+  .icon { position: absolute; width: 78px; text-align: center; cursor: pointer; user-select: none; -webkit-user-select: none;
+          touch-action: none; font: 11px Tahoma, "MS Sans Serif", sans-serif; z-index: 5; -webkit-touch-callout: none; }
+  .icon .g { display: block; height: 40px; }
+  .icon .g svg { width: 36px; height: 36px; margin-top: 2px; }
+  .icon .l { display: inline-block; padding: 1px 3px; margin-top: 2px; color: #000; line-height: 13px; }
+  .icon.sel .l { background: #000080; color: #fff; outline: 1px dotted #000; }
+  .icon.sel .g svg { filter: brightness(.55) sepia(1) hue-rotate(190deg) saturate(4); }
+  /* ---------- win98-style video controls ---------- */
+  .vwrap { flex: none; display: flex; flex-direction: column; }
+  .vctl { display: flex; align-items: center; gap: 4px; padding: 5px 2px 1px; }
+  .vb { flex: none; width: 26px; height: 22px; padding: 0; background: #c0c0c0; color: #000; cursor: pointer;
+        border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000;
+        font: bold 11px Tahoma, sans-serif; display: flex; align-items: center; justify-content: center; }
+  .vb:active, .vb.on { border-color: #404040 #fff #fff #404040; box-shadow: none; }
+  .vb svg { width: 14px; height: 14px; display: block; }
+  .vt { flex: none; padding: 2px 6px; font: 11px Tahoma, sans-serif; color: #000; background: #fff;
+        border: 1px solid; border-color: #808080 #fff #fff #808080; white-space: nowrap; }
+  .vctl input[type=range] { -webkit-appearance: none; appearance: none; background: transparent; height: 24px; margin: 0 4px; cursor: pointer; }
+  .vctl .seek { flex: 1; min-width: 40px; }
+  .vctl .vol { flex: none; width: 56px; }
+  .vctl input[type=range]::-webkit-slider-runnable-track { height: 4px; background: #fff;
+        border: 1px solid; border-color: #808080 #fff #fff #808080; box-shadow: inset 1px 1px 0 #404040; }
+  .vctl input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; box-sizing: border-box; width: 11px; height: 20px; margin-top: -9px;
+        background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000; }
+  .vctl input[type=range]::-moz-range-track { height: 4px; background: #fff; border: 1px solid; border-color: #808080 #fff #fff #808080; }
+  .vctl input[type=range]::-moz-range-thumb { box-sizing: border-box; width: 11px; height: 20px; border-radius: 0;
+        background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000; }
+  .gl { width: 0.75em; height: 0.75em; fill: currentColor; vertical-align: -0.05em; display: inline-block; }
+  .vb .gl { width: 10px; height: 10px; vertical-align: 0; }
+  .fm .play .gl { width: 16px; height: 16px; filter: drop-shadow(0 1px 1px rgba(0,30,60,.6)); }
+  /* the sign-off window starts at the bottom of the page and scrolls with it (until it's dragged) */
+  .win.pagewin { position: absolute; }
+  #signoff-spot { height: 0; }
+  .btns .count { margin-right: auto; align-self: center; padding-left: 4px; font: 12px Tahoma, sans-serif; color: #222; }
+  .status { flex: none; margin-top: 2px; padding: 1px 4px; border: 1px solid; border-color: #808080 #fff #fff #808080;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #222; }
+
+  /* ---------- taskbar (only shows while windows are open) ---------- */
+  #task { position: fixed; left: 0; right: 0; bottom: 0; height: 28px; background: #c0c0c0; border-top: 2px solid #fff;
+          display: flex; align-items: center; gap: 3px; padding: 0 3px; font: 12px Tahoma, sans-serif; z-index: 99999; }
+  #task .start { font-weight: bold; }
+  #task button { height: 22px; background: #c0c0c0; border: 2px solid; border-color: #fff #404040 #404040 #fff;
+                 font: 12px Tahoma, sans-serif; max-width: 150px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: pointer; }
+  #task button.active { border-color: #404040 #fff #fff #404040; background: #dcdcdc; }
+  #task .tray { margin-left: auto; padding: 2px 8px; border: 1px solid; border-color: #808080 #fff #fff #808080; }
+  #tasks { display: flex; gap: 3px; overflow: hidden; min-width: 0; }
+  #task .start.open { border-color: #404040 #fff #fff #404040; background: #dcdcdc; }
+  #startmenu { position: fixed; left: 2px; bottom: 30px; z-index: 100000; display: none; background: #c0c0c0;
+               border: 2px solid; border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000;
+               font: 12px Tahoma, "MS Sans Serif", sans-serif; }
+  #startmenu.on { display: flex; }
+  #startmenu .band { width: 22px; background: linear-gradient(#1084d0, #000080); color: #c0c0c0; font: bold 14px Tahoma, sans-serif;
+                     writing-mode: vertical-rl; transform: rotate(180deg); padding: 6px 0; letter-spacing: 1px; }
+  #startmenu .band b { color: #fff; }
+  #startmenu ul { list-style: none; margin: 0; padding: 2px; min-width: 170px; }
+  #startmenu li { margin: 0; padding: 6px 20px 6px 8px; cursor: pointer; white-space: nowrap; }
+  #startmenu li:hover { background: #000080; color: #fff; }
+  #startmenu li .ic { display: inline-block; width: 24px; vertical-align: middle; }
+  #startmenu li .ic svg { width: 18px; height: 18px; display: block; }
+  #startmenu hr { border: 0; border-top: 1px solid #808080; border-bottom: 1px solid #fff; margin: 3px 2px; }
+
+  /* ---------- maxojkb.fm: a plain win98-style player window ---------- */
+  .body.fm98 { display: block; padding: 0; background: #000; overflow: hidden; flex: none; height: 152px; }
+  .body.fm98 iframe, .body.fm98 .fm-slot { border: 0; width: 100%; height: 152px; display: block; }
+  .fmctl { flex: none; display: flex; align-items: center; gap: 4px; padding: 5px 2px 2px; }
+  .fmctl .seek { flex: 1; min-width: 40px; }
+  .fmctl .vb.off { color: #808080; cursor: default; }
+  .fmctl .vb.off .gl { fill: #808080; filter: drop-shadow(1px 1px 0 #fff); }
+  .blink { animation: b 1s steps(1) infinite; }
+  @keyframes b { 50% { opacity: 0; } }
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://maxojkb.com/#person",
+  "name": "Maxime Kawawa-Beaudan",
+  "alternateName": [
+    "Maxime Beaudan",
+    "Maxime Kawawa Beaudan",
+    "M. Kawawa-Beaudan"
+  ],
+  "url": "https://maxojkb.com/",
+  "image": "https://maxojkb.com/img/me/1.jpg",
+  "description": "Maxime Kawawa-Beaudan (b. 1999, New York, NY) is a writer and painter. His fiction has appeared in Glimmer Train, Expat Press, and the YoungArts Writer's Anthology.",
+  "jobTitle": [
+    "Writer",
+    "Painter",
+    "Research Scientist"
+  ],
+  "birthDate": "1999",
+  "birthPlace": {
+    "@type": "Place",
+    "name": "New York, NY"
+  },
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Brooklyn, NY"
+  },
+  "nationality": [
+    {
+      "@type": "Country",
+      "name": "United States"
+    },
+    {
+      "@type": "Country",
+      "name": "France"
+    }
+  ],
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "University of California, Berkeley",
+      "sameAs": "https://www.berkeley.edu/"
+    },
+    {
+      "@type": "EducationalOrganization",
+      "name": "Art Students League of New York",
+      "sameAs": "https://www.theartstudentsleague.org/"
+    }
+  ],
+  "award": [
+    "First Place, Glimmer Train Short Story Award for New Writers (2017)",
+    "Finalist, National YoungArts Foundation (Writing), 2017",
+    "Finalist, Flash Fiction, New Millennium Writings Awards 52 (2022)"
+  ],
+  "knowsAbout": [
+    "Fiction",
+    "Painting",
+    "Machine learning",
+    "Foundation models",
+    "Robot locomotion"
+  ],
+  "sameAs": [
+    "https://www.wikidata.org/wiki/Q142186587",
+    "https://www.google.com/search?kgmid=/g/11q8gp8l33",
+    "https://www.goodreads.com/author/show/18599195.Maxime_Kawawa_Beaudan",
+    "https://orcid.org/0009-0000-5752-8947",
+    "https://scholar.google.com/citations?user=MYz9dDUAAAAJ",
+    "https://www.youtube.com/@maxojkb",
+    "https://www.instagram.com/maxojkb"
+  ],
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ORCID",
+    "value": "0009-0000-5752-8947"
+  }
+}
+</script>
+</head>
+<body>
+
+<p><b>Maxime Kawawa-Beaudan</b> (b. 1999, New York, NY) is a writer and painter. His fiction has appeared in Glimmer Train, Expat Press, and the YoungArts Writer’s Anthology. He won Glimmer Train’s Short Story Award for New Writers, was a National YoungArts Foundation finalist in writing, and has been recognized by New Millennium Writings. He lives in Brooklyn. In his free time he enjoys <a href="#" data-g="moto">riding motorcycles</a>, <a href="#" data-g="photo">taking photos of friends</a>, and <a href="#" data-g="animals">befriending stray animals</a>.</p>
+<p class="card">E: <a href="mailto:maxojkb@proton.me">maxojkb@proton.me</a><br>
+IG: <a href="https://www.instagram.com/maxojkb" target="_blank">@maxojkb</a></p>
+
+<div id="desk"></div>
+
+<!-- ===================== WRITING ===================== -->
+<div class="sec">
+  <b>Writing</b>
+  <p class="sub">Fiction</p>
+  <ul>
+    <li><a href="https://expatpress.com/notes-from-the-blue-notebook-maxime-kawawa-beaudan/" target="_blank">Notes from the Blue Notebook</a> in Expat Press, 2026.</li>
+    <li><a href="https://www.goodreads.com/en/book/show/42730495-glimmer-train-stories-103" target="_blank">Waiting for Fireworks</a> in Glimmer Train, 2018 (print only).</li>
+    <li><span class="nolink">Big Picture Kind of Guy</span> in the YoungArts Writer's Anthology, 2017 (print only).</li>
+  </ul>
+  <p class="sub">Nonfiction</p>
+  <ul>
+    <li><span class="nolink">A Constitution for a Young Artist</span> in Glimmer Train, 2018.</li>
+  </ul>
+  <p class="sub">Honors &amp; Awards</p>
+  <ul>
+    <li>Longlist, Fish Flash Fiction Prize, 2026.</li>
+    <li>Finalist, Flash Fiction, New Millennium Writings Awards 52, 2022.</li>
+    <li>First Place, Short Story Award for New Writers, <i>Glimmer Train</i>, Sept/Oct 2017.</li>
+    <li>Finalist, National YoungArts Foundation (Writing), 2017.</li>
+    <li>Finalist, Short Story Award for New Writers, <i>Glimmer Train</i>, Jan/Feb 2017.</li>
+    <li>Finalist, Short Story Award for New Writers, <i>Glimmer Train</i>, Jan/Feb 2016.</li>
+    <li>Honorable Mention, Short Fiction, New Millennium Writings Awards 42, 2016.</li>
+    <li>Honorable Mention, Very Short Fiction, <i>Glimmer Train</i>, July/Aug 2016.</li>
+    <li>Honorable Mention, Short Story Award for New Writers, <i>Glimmer Train</i>, May/June 2016.</li>
+    <li>Honorable Mention, Very Short Fiction, <i>Glimmer Train</i>, Mar/Apr 2016.</li>
+  </ul>
+</div>
+
+<!-- ===================== VISUAL ART ===================== -->
+<div class="sec">
+  <b>Visual Art</b>
+  <p class="sub">Paintings</p>
+  <ul id="paintings"></ul>
+  <p class="sub">Sketches</p>
+  <ul id="sketches"></ul>
+  <p class="sub">Exhibitions</p>
+  <ul>
+    <li><i>Juried Group Show</i>, Greenpoint Gallery, Brooklyn, NY, 2026.</li>
+    <li><i>Student Salon — Baker Drawing Class</i>, Phyllis Harriman Mason Gallery, Art Students League of New York, 2026.</li>
+    <li><i>Student Salon — Baker Painting Class</i>, Phyllis Harriman Mason Gallery, Art Students League of New York, 2026.</li>
+  </ul>
+</div>
+
+<!-- ===================== RESEARCH ===================== -->
+<div class="sec">
+  <b>Research</b>
+  <p class="sub">Papers</p>
+  <ul>
+    <li><a href="https://arxiv.org/abs/2602.23784" target="_blank">TradeFM: Generative Foundation Model for Trade-flow and Market Microstructure</a> arXiv, 2026.</li>
+    <li><a href="https://openreview.net/forum?id=ZMEIc25o0a" target="_blank">One Token per Trade: Multi-Resolution Limit Order Book Forecasting with a Foundation Model</a> ICML Workshop, 2026.</li>
+    <li><a href="https://link.springer.com/chapter/10.1007/978-3-032-37679-4_40" target="_blank">Pairwise Likelihood Ranking for Imbalanced Sequence Classification</a> ECML, 2026.</li>
+    <li><a href="https://arxiv.org/pdf/2411.02174" target="_blank">Behavioral Sequence Modeling with Ensemble Learning</a> NeurIPS Workshop, 2024.</li>
+    <li><a href="https://arxiv.org/pdf/2409.07619" target="_blank">Ensemble Methods for Sequence Classification with Hidden Markov Models</a> arXiv, 2024.</li>
+    <li><a href="http://www-video.eecs.berkeley.edu/papers/zixian/hexapod_IROS_2023.pdf" target="_blank">Perceptive Legged Locomotion for Climbing Joist Environments</a> IROS, 2023. [<a href="https://youtu.be/OBjRWEoQPww" target="_blank">video</a>]</li>
+    <li><a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2022/EECS-2022-146.html" target="_blank">Learning to Walk: Legged Hexapod Locomotion from Simulation to the Real World</a> UC Berkeley, 2022. [<a href="https://sites.google.com/view/hexapod-rl/home" target="_blank">website</a>]</li>
+    <li><a href="http://www-video.eecs.berkeley.edu/papers/avz/revised-icra-2022.pdf" target="_blank">Robotic Cleaning and Air Sealing of Attics</a> ICRA Workshop, 2022.</li>
+    <li><a href="https://arxiv.org/abs/2202.00198" target="_blank">Recognition-Aware Learned Image Compression</a> Computational Imaging, 2022. [<a href="http://www-video.eecs.berkeley.edu/papers/mkawawa/ei2022-talk-maxime.mp4" target="_blank">talk</a>]</li>
+  </ul>
+  <p class="sub">Patents</p>
+  <ul>
+    <li><a href="https://patents.google.com/patent/US20260212279A1/en" target="_blank">System and Methods for Classifying Behaviors in Sequence Data</a> Pending.</li>
+    <li><a href="https://patents.google.com/patent/US20240303323A1/en" target="_blank">System and Methods for Detecting Anomalous Behavior in Stream Data</a> Pending.</li>
+  </ul>
+</div>
+
+<div class="sec">
+  <b>Education</b>
+  <ul>
+  <li>Art Students League of New York, present.</li>
+  <li>M.S. Electrical Engineering &amp; Computer Science, University of California, Berkeley, 2022.</li>
+  <li>B.A. Computer Science, Minor in Creative Writing, University of California, Berkeley, 2020.</li>
+</ul>
+</div>
+
+<!-- ===================== SIGN-OFF: a window that lives at the bottom of the page ===================== -->
+<div class="sec" id="signoff-spot"></div>
+
+
+<div id="startmenu"><div class="band"><b>maxojkb</b>99</div><ul>
+  <li data-app="me"><span class="ic">📷</span>me</li>
+  <li data-app="moto"><span class="ic">🏍️</span>motorcycles</li>
+  <li data-app="photo"><span class="ic">🎞️</span>photos of friends</li>
+  <li data-app="animals"><span class="ic">🐈</span>beasts and critters</li>
+  <li data-app="trailcam"><span class="ic">🎥</span>trail clips</li>
+  <hr>
+  <li data-app="art"><span class="ic">🖼️</span>art i like</li>
+  <li data-app="reading"><span class="ic">📚</span>reading_list.txt</li>
+  <li data-app="fm"><span class="ic">♫</span>maxojkb.fm</li>
+  <hr>
+  <li data-app="thanks"><span class="ic">✉️</span>thanks.jpg</li>
+  <li data-app="close"><span class="ic">✕</span>close all windows</li>
+</ul></div>
+<div id="task"><button class="start" id="startbtn">⊞ start</button><div id="tasks"></div><span class="tray" id="clock"></span></div>
+
+<script>
+// ---------- the art (titles / media / sizes from maxojkb.com) ----------
+var IMG = "https://maxojkb.com/images/";
+var PAINTINGS = [
+  ["Imaginative Child","Oil on canvas, 16″ × 20″","IMG_5513.JPG"],
+  ["Sadie","Oil on canvas, 16″ × 20″","IMG_5464.jpg"],
+  ["Barry 01","Oil on canvas, 8″ × 10″","IMG_5477.JPG"],
+  ["Man in hat","Oil on canvas, 8″ × 10″","IMG_5471.JPG"],
+  ["Sleeping girl on plane","Digital paint, 4″ × 10″","IMG_1617.PNG"],
+  ["Lee 01","Oil on canvas, 12″ × 16″","IMG_5521.JPG"],
+  ["Skull study 01","Oil on canvas, 4″ × 4″","IMG_1759.JPG"],
+  ["Boy with green socks","Oil on canvas, 12″ × 16″","IMG_5525.JPG"],
+  ["Freddy 01","Oil on canvas, 12″ × 16″","IMG_5508.JPG"],
+  ["Skull study 02","Oil on canvas, 8″ × 10″","IMG_5485.JPG"],
+  ["Still life 01","Oil on canvas, 8″ × 10″","IMG_5498.JPG"],
+  ["Egg","Oil on canvas, 6″ × 6″","IMG_5466.JPG"]
+];
+var SKETCHES = [
+  ["Eurostar sketch 01","Graphite on paper, 8″ × 10″","IMG_2968.PNG"],
+  ["Eurostar sketch 02","Graphite on paper, 8″ × 10″","IMG_2971.PNG"],
+  ["Eurostar sketch 03","Graphite on paper, 8″ × 10″","IMG_2972.PNG"],
+  ["Subway self-portrait","Graphite on paper, 5″ × 8″","IMG_2974.PNG"],
+  ["Paris bus rider","Graphite on paper, 5″ × 8″","IMG_2973.PNG"],
+  ["Paris boulevard","Graphite on paper, 5″ × 8″","Scan 266.jpeg"],
+  ["Airplane sketch","Graphite on paper, 5″ × 5″","IMG_2980.PNG"],
+  ["Sky","Graphite on paper, 8″ × 10″","Scan 313.jpeg"],
+  ["Figure drawing 01","Graphite on paper, 8.5″ × 11″","figure i.png","figure-drawing-i-poster",true],
+  ["Gesture drawing 01","Graphite on paper, 8.5″ × 11″","gesture i.png","gesture-drawings-i-poster",true]
+];
+function src(f){ return IMG + encodeURIComponent(f); }
+function fname(t){ return t.toLowerCase().replace(/[^a-z0-9]+/g,"_") ; }
+
+function fill(id, list){
+  var ul = document.getElementById(id);
+  list.forEach(function(w){
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.href = "#"; a.textContent = w[0];
+    a.onclick = function(e){ e.preventDefault(); openImg(w); };
+    li.appendChild(a);
+    li.appendChild(document.createTextNode(" " + w[1] + "."));
+    ul.appendChild(li);
+  });
+}
+fill("paintings", PAINTINGS);
+fill("sketches", SKETCHES);
+
+// ---------- icon art (drawn here, 32×32, pixel style) ----------
+var ICON_SVG = {
+  folder: '<svg viewBox="0 0 32 32" shape-rendering="crispEdges">' +
+          '<path d="M2 7h10l2 2h15v19H2z" fill="#000"/>' +
+          '<path d="M3 8h8l2 2h15v17H3z" fill="#c9a12b"/>' +
+          '<path d="M3 13h25v14H3z" fill="#000"/>' +
+          '<path d="M4 14h23v12H4z" fill="#f6d55c"/>' +
+          '<path d="M4 14h23v1H4z" fill="#fff3b0"/><path d="M4 14h1v12H4z" fill="#fff3b0"/>' +
+          '<path d="M4 25h23v1H4z" fill="#b8901f"/><path d="M26 15h1v11h-1z" fill="#b8901f"/></svg>',
+  txt:    '<svg viewBox="0 0 32 32" shape-rendering="crispEdges">' +
+          '<path d="M6 2h14l6 6v22H6z" fill="#000"/>' +
+          '<path d="M7 3h12v6h6v20H7z" fill="#fff"/>' +
+          '<path d="M20 3l5 5h-5z" fill="#c0c0c0"/><path d="M20 8h5v1h-5z" fill="#000"/><path d="M19 3h1v6h-1z" fill="#000"/>' +
+          '<path d="M10 12h12v1H10zM10 15h12v1H10zM10 18h12v1H10zM10 21h9v1h-9zM10 24h11v1H10z" fill="#000080"/></svg>',
+  cd:     '<svg viewBox="0 0 32 32">' +
+          '<defs><radialGradient id="cdg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ffffff"/>' +
+          '<stop offset=".35" stop-color="#d7dbe3"/><stop offset=".6" stop-color="#b9c7f0"/><stop offset=".75" stop-color="#f3c6e8"/>' +
+          '<stop offset=".9" stop-color="#c8f0d8"/><stop offset="1" stop-color="#a9afbb"/></radialGradient></defs>' +
+          '<circle cx="16" cy="16" r="14" fill="url(#cdg)" stroke="#555" stroke-width="1"/>' +
+          '<circle cx="16" cy="16" r="5" fill="#e9ecf2" stroke="#888" stroke-width=".8"/>' +
+          '<circle cx="16" cy="16" r="2" fill="#fff" stroke="#555" stroke-width=".8"/>' +
+          '<path d="M8 9 A11 11 0 0 1 16 5" stroke="#fff" stroke-width="1.5" fill="none" opacity=".9"/></svg>'
+};
+function iconFor(app){ return app === "fm" ? ICON_SVG.cd : app === "reading" ? ICON_SVG.txt : ICON_SVG.folder; }
+
+// ---------- window manager ----------
+var Z = 100, N = 0, wins = [];
+function front(w){
+  if (+w.style.zIndex === Z && w.isConnected) return;     // already on top: change nothing
+  w.style.zIndex = ++Z;
+  wins.forEach(function(x){ x.classList.toggle("inactive", x !== w); });
+  drawTasks();
+}
+function makeWin(title, bodyEl, status, opts){
+  opts = opts || {};
+  var w = document.createElement("div");
+  w.className = "win";
+  w.innerHTML = '<div class="bar"><span class="t"></span><button title="minimize">_</button><button title="maximize">□</button><button title="close">×</button></div>';
+  w.querySelector(".t").textContent = title;
+  w.appendChild(bodyEl);
+  if (opts.buttons){ w.appendChild(opts.buttons); }
+  if (status){ var s = document.createElement("div"); s.className = "status"; s.textContent = status; w.appendChild(s); }
+  var b = w.querySelectorAll(".bar button");
+  b[0].onclick = function(){ w.classList.toggle("min"); };
+  b[1].onclick = function(){ maxi(w); };
+  b[2].onclick = function(){ closeWin(w); };
+  w.addEventListener("click", function(){ if (w.isConnected) front(w); });
+  drag(w, w.querySelector(".bar"));
+  w._title = title;
+  addGrip(w);
+  (opts.parent || document.body).appendChild(w);
+  if (!opts.static){ wins.push(w); }
+  front(w);
+  return w;
+}
+function addGrip(w){                 // bottom-right corner handle; works with touch too
+  var g = document.createElement("div"); g.className = "rsz"; g.title = "resize"; w.appendChild(g);
+  g.addEventListener("pointerdown", function(e){
+    e.preventDefault(); e.stopPropagation();
+    var sx = e.clientX, sy = e.clientY, ow = w.offsetWidth, oh = w.offsetHeight;
+    g.setPointerCapture(e.pointerId);
+    g.onpointermove = function(m){
+      w._moved = true; front(w);
+      w.style.width  = Math.max(180, ow + m.clientX - sx) + "px";
+      w.style.height = Math.max(110, oh + m.clientY - sy) + "px";
+    };
+  });
+  g.addEventListener("pointerup", function(){ g.onpointermove = null; });
+}
+function closeWin(w){ w.remove(); wins = wins.filter(function(x){ return x !== w; }); drawTasks(); }
+function maxi(w){
+  if (w._prev){ Object.assign(w.style, w._prev); w._prev = null; return; }
+  w._prev = { left: w.style.left, top: w.style.top, width: w.style.width, height: w.style.height };
+  var pos = getComputedStyle(w).position, fixed = pos === "fixed", page = pos === "absolute" && w.parentNode === document.body;
+  Object.assign(w.style, { left: (page ? scrollX : 0) + "px", top: (page ? scrollY : 0) + "px",
+                           width: (fixed || page ? innerWidth : w.parentNode.clientWidth) + "px",
+                           height: (fixed || page ? innerHeight - 30 : w.parentNode.clientHeight) + "px" });
+}
+function drag(w, handle){
+  var sx, sy, ox, oy;
+  handle.addEventListener("pointerdown", function(e){
+    if (e.target.tagName === "BUTTON") return;
+    sx = e.clientX; sy = e.clientY; ox = w.offsetLeft; oy = w.offsetTop;
+    handle.setPointerCapture(e.pointerId);
+    handle.onpointermove = function(m){
+      if (Math.abs(m.clientX - sx) + Math.abs(m.clientY - sy) < 4) return;   // a tap, not a drag
+      front(w);
+      w.style.left = (ox + m.clientX - sx) + "px";
+      w.style.top  = Math.max(0, oy + m.clientY - sy) + "px";
+    };
+  });
+  handle.addEventListener("pointerup", function(){ handle.onpointermove = null; });
+}
+function place(w, wd, ht){
+  var vw = innerWidth, vh = innerHeight - 30;
+  wd = Math.min(wd, vw - 20); ht = Math.min(ht, vh - 20);
+  var off = (N++ % 8) * 26;
+  w.style.width = wd + "px"; w.style.height = ht + "px";
+  w.style.left = Math.max(5, Math.min(vw - wd - 5, (vw - wd) / 2 - 90 + off)) + "px";
+  w.style.top  = Math.max(5, Math.min(vh - ht - 5, (vh - ht) / 2 - 70 + off)) + "px";
+}
+
+function openImg(work){
+  var body = document.createElement("div"); body.className = "body";
+  var img = new Image(); img.src = src(work[2]); img.alt = work[0];
+  body.appendChild(img);
+  var shop = work[3] || "", orig = work[4] !== false;   // every original is available unless marked false
+  var subj = "Inquiry: " + work[0];
+  var mail = "Hi Maxime,\n\nI'm interested in purchasing the original work:\n\n  " + work[0] + "\n  " +
+             work[1].replace(/″/g, '"') + "\n\nCould you let me know if it's still available and the asking price?\n\nThank you,\n[Your name]";
+  var btns = document.createElement("div"); btns.className = "btns";
+  btns.innerHTML =
+    (shop ? '<a class="btn" target="_blank" rel="noopener noreferrer" href="https://maxojkb.myshopify.com/products/' + shop + '">Buy Print</a>'
+          : '<span class="btn ghost" title="no prints yet">Buy Print</span>') +
+    (orig ? '<a class="btn" href="mailto:maxojkb@proton.me?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(mail) + '">Own the Original</a>'
+          : '<span class="btn ghost">Inquire</span>');
+  var w = makeWin(fname(work[0]) + ".jpg", body, work[0] + " — " + work[1], { buttons: btns });
+  place(w, 420, 540);
+  img.onload = function(){ // size the window to the picture, within reason
+    var r = img.naturalWidth / img.naturalHeight, h = Math.min(520, innerHeight - 140), wd = h * r + 12;
+    if (wd > 640){ wd = 640; h = (wd - 12) / r; }
+    w.style.width = Math.min(wd, innerWidth - 20) + "px"; w.style.height = (h + 86) + "px";
+  };
+}
+function openTxt(title, text){
+  var body = document.createElement("div"); body.className = "body txt";
+  body.textContent = text; body.style.whiteSpace = "pre-wrap";
+  place(makeWin(fname(title) + ".txt", body, null), 300, 170);
+}
+document.querySelectorAll("a.info").forEach(function(a){
+  a.onclick = function(e){ e.preventDefault(); openTxt(a.dataset.t, a.dataset.i); };
+});
+
+// ---------- galleries ----------
+// each gallery is a folder in img/. name the files 1.jpg, 2.jpg, 3.jpg ... (no gaps).
+// the page counts up until a number is missing, so add new ones with the next number.
+// .jpeg / .png / .gif / .webp work too (videos: .mp4 / .webm / .mov).
+//
+// annotations: put a text file next to any image with the same number -- 3.txt goes with 3.jpg.
+// the first line shows in bold (a title, an artist, a place), the rest underneath.
+var GALLERIES = {
+  me:       { name: "me",                dir: "img/me/",          kind: "img" },
+  moto:     { name: "motorcycles",       dir: "img/motorcycle/",  kind: "img" },
+  photo:    { name: "photos of friends", dir: "img/photography/", kind: "img" },
+  animals:  { name: "beasts and critters", dir: "img/cats/",        kind: "img" },
+  art:      { name: "art i like",        dir: "img/art/",         kind: "img" },
+  trailcam: { name: "trail clips",       dir: "img/trail clips/", kind: "vid" }
+};
+var EXTS = { img: ["jpg", "jpeg", "png", "gif", "webp"], vid: ["mp4", "webm", "mov", "m4v"] };
+function probe(g, n, cb){                      // backup: finds n.<ext>, or calls cb(null)
+  var exts = [];
+  EXTS[g.kind].forEach(function(x){ exts.push(x, x.toUpperCase()); });
+  (function tryExt(i){
+    if (i >= exts.length) return cb(null);
+    var url = encodeURI(g.dir + n + "." + exts[i]);
+    var el = g.kind === "vid" ? document.createElement("video") : new Image();
+    function ok(){ el.onload = el.onerror = el.onloadedmetadata = null; cb(url); }
+    function no(){ el.onload = el.onerror = el.onloadedmetadata = null; tryExt(i + 1); }
+    if (g.kind === "vid"){ el.preload = "metadata"; el.onloadedmetadata = ok; } else el.onload = ok;
+    el.onerror = no;
+    el.src = url;
+  })(0);
+}
+function discover(g, onFound, onDone){         // cached after the first time
+  if (g.done){ g.items.forEach(onFound); return onDone(); }
+  if (g.busy){ g.waiters.push([onFound, onDone]); return; }
+  g.busy = true; g.items = []; g.waiters = [[onFound, onDone]];
+  function found(it){ g.items.push(it); g.waiters.forEach(function(w){ w[0](it); }); }
+  function finish(){ g.done = true; g.busy = false; g.waiters.forEach(function(w){ w[1](); }); g.waiters = []; }
+  (function next(n){
+    probe(g, n, function(url){
+      if (!url) return finish();
+      found({ url: url, note: encodeURI(g.dir + n + ".txt") }); next(n + 1);
+    });
+  })(1);
+}
+var noteCache = {};
+function loadNote(url, cb){
+  if (!url) return cb("");
+  if (url in noteCache) return cb(noteCache[url]);
+  fetch(url).then(function(r){ return r.ok ? r.text() : ""; }).catch(function(){ return ""; })
+    .then(function(t){ noteCache[url] = t.trim(); cb(noteCache[url]); });
+}
+
+// ---------- tiny drawn glyphs (iphones turn ▶ ◀ into color emoji, so these are drawn instead) ----------
+function glyph(d){ return '<svg class="gl" viewBox="0 0 8 8" aria-hidden="true"><path d="' + d + '"/></svg>'; }
+var G_PLAY = glyph("M1.5 0.5 7 4 1.5 7.5z"), G_BACK = glyph("M6.5 0.5 1 4 6.5 7.5z"),
+    G_PAUSE = glyph("M1.5 0.5h2v7h-2zM4.5 0.5h2v7h-2z"), G_STOP = glyph("M1 1h6v6H1z"),
+    G_FULL = glyph("M0 0h3v1H1v2H0zM5 0h3v3H7V1H5zM0 5h1v2h2v1H0zM7 5h1v3H5V7h2z");
+
+// ---------- win98-style video controls (replace the browser's own) ----------
+var SPK = '<svg viewBox="0 0 14 14" shape-rendering="crispEdges"><path d="M1 5h3l4-3v10L4 9H1z" fill="#000"/>' +
+          '<path d="M10 4h1v1h1v4h-1v1h-1V9h1V5h-1z" fill="#000" class="w"/></svg>';
+function videoControls(v){
+  var el = document.createElement("div"); el.className = "vctl";
+  el.innerHTML =
+    '<button class="vb" title="play">' + G_PLAY + '</button><button class="vb" title="stop">' + G_STOP + '</button>' +
+    '<input class="seek" type="range" min="0" max="1000" value="0" aria-label="seek">' +
+    '<span class="vt">0:00 / 0:00</span>' +
+    '<button class="vb" title="mute">' + SPK + '</button>' +
+    '<input class="vol" type="range" min="0" max="100" value="100" aria-label="volume">' +
+    '<button class="vb" title="full screen">' + G_FULL + '</button>';
+  var b = el.querySelectorAll("button"), play = b[0], stop = b[1], mute = b[2], full = b[3];
+  var seek = el.querySelector(".seek"), vol = el.querySelector(".vol"), vt = el.querySelector(".vt"), dragging = false;
+  function t(x){ x = Math.floor(x || 0); return Math.floor(x / 60) + ":" + ("0" + x % 60).slice(-2); }
+  function tick(){
+    vt.textContent = t(v.currentTime) + " / " + t(v.duration);
+    if (!dragging && v.duration) seek.value = Math.round(1000 * v.currentTime / v.duration);
+  }
+  play.onclick = function(){ v.paused ? v.play() : v.pause(); };
+  v.addEventListener("click", function(){ v.paused ? v.play() : v.pause(); });
+  stop.onclick = function(){ v.pause(); v.currentTime = 0; tick(); };
+  v.addEventListener("play",  function(){ play.innerHTML = G_PAUSE; play.title = "pause"; });
+  v.addEventListener("pause", function(){ play.innerHTML = G_PLAY;  play.title = "play"; });
+  v.addEventListener("timeupdate", tick);
+  v.addEventListener("loadedmetadata", tick);
+  seek.addEventListener("input", function(){ dragging = true; if (v.duration) v.currentTime = seek.value / 1000 * v.duration; tick(); });
+  seek.addEventListener("change", function(){ dragging = false; });
+  vol.addEventListener("input", function(){ v.volume = vol.value / 100; v.muted = vol.value == 0; mute.classList.toggle("on", v.muted); });
+  mute.onclick = function(){ v.muted = !v.muted; mute.classList.toggle("on", v.muted); };
+  full.onclick = function(){
+    if (v.requestFullscreen) v.requestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();       // iphone
+  };
+  v.volume = 0.5; if (v.volume !== 0.5) vol.style.display = "none";    // iphones only allow the hardware volume buttons
+  v.volume = 1;
+  return { el: el, reset: function(){ play.innerHTML = G_PLAY; seek.value = 0; vt.textContent = "0:00 / 0:00"; } };
+}
+
+function openGallery(key){
+  var g = GALLERIES[key], i = 0, items = [], done = false, vid = g.kind === "vid";
+  var body = document.createElement("div");
+  body.className = "body" + (vid ? " vid" : " art");
+  var media = vid ? document.createElement("video") : new Image();
+  if (vid){ media.controls = false; media.setAttribute("playsinline", ""); media.preload = "metadata"; }
+  var note = document.createElement("div"); note.className = "note";
+  if (!vid){
+    var pic = document.createElement("div"); pic.className = "pic"; pic.appendChild(media);
+    body.appendChild(pic); body.appendChild(note);
+  } else body.appendChild(media);
+  var btns = document.createElement("div"); btns.className = "btns";
+  btns.innerHTML = '<span class="count"></span><a href="#" class="btn">' + G_BACK + ' Back</a><a href="#" class="btn">Next ' + G_PLAY + '</a>';
+  var bottom = btns, vc = null;
+  if (vid){ vc = videoControls(media); bottom = document.createElement("div"); bottom.className = "vwrap"; bottom.appendChild(vc.el); bottom.appendChild(btns); }
+  var w = makeWin(g.name, body, vid ? " " : null, { buttons: bottom });
+  w._app = key;
+  var status = w.querySelector(".status");
+  var b = btns.querySelectorAll("a");
+  function label(){
+    btns.querySelector(".count").textContent = items.length ? (i + 1) + " of " + items.length + (done ? "" : "+")
+                                                             : (done ? "nothing here yet" : "loading…");
+    var dis = done && items.length < 2;
+    b[0].className = b[1].className = dis ? "btn ghost" : "btn";
+  }
+  function show(n){
+    if (!items.length) return;
+    var max = items.length;
+    i = done ? (n + max) % max : Math.max(0, Math.min(n, max - 1));
+    var it = items[i];
+    if (vid){ media.pause(); vc.reset(); }
+    media.src = it.url;
+    w.querySelector(".t").textContent = decodeURIComponent(it.url.split("/").pop());
+    label();
+    {
+      var want = it.url;
+      loadNote(it.note, function(t){
+        if (items[i].url !== want) return;
+        if (vid){ status.textContent = t || " "; return; }
+        note.innerHTML = "";
+        if (t){                                  // first line in bold (title / artist), the rest is the note
+          var lines = t.split("\n"), head = document.createElement("b");
+          head.textContent = lines[0]; note.appendChild(head);
+          note.appendChild(document.createTextNode(lines.slice(1).join("\n").trim()));
+        }
+      });
+    }
+  }
+  b[0].onclick = function(e){ e.preventDefault(); show(i - 1); };
+  b[1].onclick = function(e){ e.preventDefault(); show(i + 1); };
+  w._step = show; w._idx = function(){ return i; };
+  label();
+  discover(g, function(it){ items.push(it); if (items.length === 1) show(0); else label(); },
+              function(){ done = true; if (!items.length) w.querySelector(".t").textContent = g.name + " (empty)"; label(); });
+  if (key === "art") place(w, 460, 640); else if (vid) place(w, 600, 480); else place(w, 380, 560);
+  return w;
+}
+
+// ---------- reading list ----------
+// edit reading.txt (next to this page). format:
+//   # books                         <- a heading
+//   Title, Author | https://link | why you like it      <- link and note are optional
+function openReading(){
+  var body = document.createElement("div"); body.className = "body list";
+  body.textContent = "loading…";
+  var w = makeWin("reading_list.txt", body, null);
+  w._app = "reading";
+  place(w, 440, 560);
+  fetch("reading.txt").then(function(r){ return r.ok ? r.text() : ""; }).catch(function(){ return ""; }).then(function(t){
+    body.innerHTML = "";
+    var ul = null, any = false;
+    t.split("\n").forEach(function(line){
+      line = line.trim();
+      if (!line || line.indexOf("//") === 0) return;
+      if (line === "---"){ body.appendChild(document.createElement("hr")); ul = null; return; }
+      if (line[0] === ">"){                           // "> text" is a note paragraph (one paragraph per line)
+        var p = document.createElement("p"); p.className = "intro"; p.textContent = line.replace(/^>\s*/, ""); body.appendChild(p); return;
+      }
+      if (line[0] === "#"){
+        var h = document.createElement("h4"); h.textContent = line.replace(/^#+\s*/, ""); body.appendChild(h); ul = null; return;
+      }
+      if (!ul){ ul = document.createElement("ul"); body.appendChild(ul); }
+      var parts = line.split("|").map(function(x){ return x.trim(); });
+      var li = document.createElement("li"), url = parts[1] && /^https?:\/\//.test(parts[1]) ? parts[1] : null;
+      var why = url ? parts.slice(2).join(" | ") : parts.slice(1).join(" | ");
+      // "Title", Author -> a quoted title ends at its closing quote, so titles and authors can both have commas.
+      // Title, Author (no quotes) -> the author is whatever comes after the last comma.
+      // *Title* (italic: books, plays, films) or "Title" (quotes: stories, essays, poems, videos)
+      var t0 = parts[0], q = t0.match(/^(["“][^"”]*["”]|\*[^*]+\*)\s*,?\s*(.*)$/), cut = t0.lastIndexOf(",");
+      var title  = q ? q[1] : (cut > 0 ? t0.slice(0, cut).trim() : t0),
+          author = q ? q[2].trim() : (cut > 0 ? t0.slice(cut + 1).trim() : "");
+      var ital = /^\*.*\*$/.test(title); if (ital) title = title.slice(1, -1);
+      var tnode = document.createTextNode(title);
+      if (ital){ var em = document.createElement("i"); em.appendChild(tnode); tnode = em; }
+      if (url){ var a = document.createElement("a"); a.href = url; a.target = "_blank"; a.rel = "noopener"; a.appendChild(tnode); tnode = a; }
+      li.appendChild(tnode);
+      // quoted titles carry their own punctuation inside the quotes ("Gossip," / "...Coordinates."), MLA style
+      var sep = author ? (/[,.?!]['’]?["”]$/.test(title) ? " " : ", ") : "";
+      li.appendChild(document.createTextNode(sep + author + (why ? " — " + why : "")));
+      ul.appendChild(li); any = true;
+    });
+    if (!any) body.innerHTML = "<p><i>nothing here yet.</i></p>";
+  });
+  return w;
+}
+
+document.querySelectorAll("[data-g]").forEach(function(el){
+  el.onclick = function(e){ e.preventDefault(); openApp(el.dataset.g); };
+});
+document.addEventListener("keydown", function(e){   // arrow keys flip the front gallery
+  var top = wins.filter(function(w){ return +w.style.zIndex === Z; })[0];
+  if (!top || !top._step) return;
+  if (e.key === "ArrowRight") top._step(top._idx() + 1);
+  if (e.key === "ArrowLeft")  top._step(top._idx() - 1);
+});
+
+// ---------- taskbar ----------
+var task = document.getElementById("task"), tasks = document.getElementById("tasks");
+var shown = [];
+function drawTasks(){
+  var same = shown.length === wins.length && shown.every(function(w, k){ return w === wins[k]; });
+  if (!same){
+    tasks.innerHTML = "";
+    wins.forEach(function(w){
+      var b = document.createElement("button");
+      b.textContent = w._title;
+      b.onclick = function(){ w.classList.remove("min"); front(w); };
+      tasks.appendChild(b);
+    });
+    shown = wins.slice();
+  }
+  var bs = tasks.children;
+  wins.forEach(function(w, k){ bs[k].classList.toggle("active", +w.style.zIndex === Z); });
+}
+
+(function tick(){
+  var d = new Date();
+  document.getElementById("clock").textContent = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  setTimeout(tick, 15000);
+})();
+
+// ---------- music player ----------
+// paste your playlist link between the quotes (Spotify > Share > Copy link to playlist).
+// leave it empty and the player just won't show up.
+var SPOTIFY_PLAYLIST = "https://open.spotify.com/playlist/5ICqt1u8WJWoRAkciOIEpG";
+
+var PLAYER_W = 340, PLAYER_H = 238, PLAYER_MIN_H = 26;
+
+function playlistId(link){
+  var m = (link || "").match(/playlist[\/:]([A-Za-z0-9]+)/);
+  return m ? m[1] : null;
+}
+function mmss(ms){ var t = Math.floor((ms || 0) / 1000); return Math.floor(t / 60) + ":" + ("0" + t % 60).slice(-2); }
+
+function openPlayer(){
+  var id = playlistId(SPOTIFY_PLAYLIST);
+  if (!id) return null;
+  var body = document.createElement("div"); body.className = "body fm98";
+  body.innerHTML = '<div class="fm-slot"></div>';
+  var ctlRow = document.createElement("div"); ctlRow.className = "vctl fmctl";
+  ctlRow.innerHTML =
+    '<button class="vb off" title="play">' + G_PLAY + '</button>' +
+    '<button class="vb off" title="stop">' + G_STOP + '</button>' +
+    '<input class="seek" type="range" min="0" max="1000" value="0" aria-label="seek" disabled>' +
+    '<span class="vt">0:00 / 0:00</span>';
+  var p = makeWin("♫ maxojkb.fm", body, "stopped", { buttons: ctlRow });
+  p._title = "♫ maxojkb.fm"; p._app = "fm";
+  p.style.width = PLAYER_W + "px"; p.style.height = PLAYER_H + "px";
+  drawTasks();
+
+  var b = ctlRow.querySelectorAll(".vb"), play = b[0], stop = b[1];
+  var seek = ctlRow.querySelector(".seek"), vt = ctlRow.querySelector(".vt"), status = p.querySelector(".status");
+  var ctl = null, dur = 0, dragging = false;
+  play.onclick = function(){ if (ctl) ctl.togglePlay(); };
+  stop.onclick = function(){ if (ctl){ ctl.pause(); ctl.seek(0); } };
+  seek.addEventListener("input",  function(){ dragging = true; });
+  seek.addEventListener("change", function(){ dragging = false; if (ctl && dur) ctl.seek(seek.value / 1000 * dur / 1000); });
+
+  function fallback(){        // if spotify's controller script can't load, just show the plain player
+    if (ctl || body.querySelector("iframe")) return;
+    var f = document.createElement("iframe");
+    f.src = "https://open.spotify.com/embed/playlist/" + id + "?utm_source=generator&theme=0";
+    f.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+    f.title = "playlist";
+    var slot = body.querySelector(".fm-slot"); slot.parentNode.replaceChild(f, slot);
+    status.textContent = "use the play button on the playlist";
+  }
+  function mount(api){
+    if (!p.isConnected || body.querySelector("iframe")) return;
+    api.createController(body.querySelector(".fm-slot"),
+      { uri: "spotify:playlist:" + id, width: "100%", height: 152 },
+      function(c){
+        ctl = c; play.classList.remove("off"); stop.classList.remove("off"); seek.disabled = false;
+        c.addListener("playback_update", function(e){
+          var d = e.data || {};
+          dur = d.duration || 0;
+          play.innerHTML = d.isPaused ? G_PLAY : G_PAUSE; play.title = d.isPaused ? "play" : "pause";
+          vt.textContent = mmss(d.position) + " / " + mmss(d.duration);
+          if (!dragging) seek.value = dur ? Math.round(1000 * d.position / dur) : 0;
+          status.textContent = d.isPaused ? (d.position ? "paused" : "stopped") : "playing";
+        });
+      });
+  }
+  if (window.__spotifyApi) mount(window.__spotifyApi);
+  else {
+    window.onSpotifyIframeApiReady = function(api){ window.__spotifyApi = api; mount(api); };
+    if (!window.__spotifyScript){
+      var sc = window.__spotifyScript = document.createElement("script");
+      sc.src = "https://open.spotify.com/embed/iframe-api/v1"; sc.async = true; sc.onerror = fallback;
+      document.body.appendChild(sc);
+    }
+  }
+  setTimeout(fallback, 6000);
+  return p;
+}
+
+// ---------- home layout: photos of me on the right / bottom, player tucked in ----------
+// windows keep following this layout as the browser resizes, until the visitor moves them
+function homeLayout(){
+  var W = innerWidth, H = innerHeight - 30;          // 30 = taskbar
+  var me = wins.filter(function(x){ return x._app === "me"; })[0];
+  var p  = wins.filter(function(x){ return x._app === "fm"; })[0];
+  var ph = p ? (p.classList.contains("min") ? PLAYER_MIN_H : PLAYER_H) : 0;
+  function put(win, r){ Object.assign(win.style, { left: r[0] + "px", top: r[1] + "px", width: r[2] + "px", height: r[3] + "px" }); }
+  if (W >= 900){
+    // photo window fills the right half; the player sits under it in the bottom-right corner
+    if (me && !me._moved) put(me, [W / 2 + 10, 12, W / 2 - 30, H - 24 - (p ? ph + 8 : 0)]);
+    if (p && !p._moved) { p.style.left = (W - PLAYER_W - 12) + "px"; p.style.top = (H - ph - 8) + "px"; }
+  } else {
+    // photo window takes the bottom half (a bit more when the player is open);
+    // the player sits on top of the photo, below its title bar and above its back / next buttons
+    var top = p ? Math.max(H * 0.25, Math.min(H * 0.4, H - ph - 80)) : H / 2;
+    if (me && !me._moved) put(me, [6, top, W - 12, H - top - 6]);
+    if (p && !p._moved) { p.style.left = Math.max(6, W - PLAYER_W - 6) + "px"; p.style.top = Math.min(top + 28, H - ph - 50) + "px"; }
+  }
+}
+function watchMoves(x){                                // once someone drags or resizes a window, it stays where they put it
+  x.querySelector(".bar, .grip").addEventListener("pointerdown", function(e){ if (e.target.tagName !== "BUTTON") x._moved = true; });
+  x.addEventListener("pointerdown", function(e){
+    var r = x.getBoundingClientRect();
+    if (e.clientX > r.right - 18 && e.clientY > r.bottom - 18) x._moved = true;
+  });
+}
+addEventListener("resize", homeLayout);
+
+// ---------- apps (start menu + bio links) ----------
+// if the app's window is already open, bring it back instead of opening a second one
+function openApp(key){
+  var open = wins.filter(function(x){ return x._app === key; })[0];
+  if (open){ open.classList.remove("min"); front(open); return open; }
+  var w = key === "fm" ? openPlayer() : key === "reading" ? openReading() : key === "thanks" ? openThanks() : openGallery(key);
+  if (!w) return null;
+  if (key === "me" || key === "fm"){ watchMoves(w); homeLayout(); }
+  if (key === "fm") w._fit = homeLayout;
+  return w;
+}
+
+// ---------- sign-off window at the bottom of the page ----------
+// a normal window (drag, resize, minimize, close, taskbar), but it lives in the page, not on the screen
+var THANKS_RATIO = 622 / 1100;                 // height / width of img/thanks.jpg
+function openThanks(){
+  var body = document.createElement("div"); body.className = "body";
+  var img = new Image(); img.src = "img/thanks.jpg"; img.alt = "handwritten note: thanks for stopping by! — Maxime";
+  body.appendChild(img);
+  var w = makeWin("thanks.jpg", body, null);
+  w._app = "thanks"; w.classList.add("pagewin");
+  watchMoves(w);
+  w._place = function(){
+    if (w._moved || !w.isConnected) return;
+    var spot = document.getElementById("signoff-spot"), r = spot.getBoundingClientRect();
+    var wd = Math.min(460, r.width || innerWidth - 24), ht = Math.round((wd - 12) * THANKS_RATIO + 34);
+    spot.style.height = (ht + 20) + "px";
+    Object.assign(w.style, { left: (r.left + scrollX) + "px", top: (r.top + scrollY) + "px", width: wd + "px", height: ht + "px" });
+  };
+  w._place();
+  return w;
+}
+addEventListener("resize", function(){ wins.forEach(function(x){ if (x._place) x._place(); }); });
+addEventListener("load",   function(){ wins.forEach(function(x){ if (x._place) x._place(); }); });
+function showSignoff(){
+  var w = openApp("thanks");
+  if (w) w.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+var menu = document.getElementById("startmenu"), startBtn = document.getElementById("startbtn");
+function setMenu(on){ menu.classList.toggle("on", on); startBtn.classList.toggle("open", on); }
+startBtn.onclick = function(e){ e.stopPropagation(); setMenu(!menu.classList.contains("on")); };
+menu.onclick = function(e){
+  e.stopPropagation();
+  var li = e.target.closest("li"); if (!li) return;
+  setMenu(false);
+  if (li.dataset.app === "close") wins.slice().forEach(closeWin);
+  else if (li.dataset.app === "thanks") showSignoff();
+  else openApp(li.dataset.app);
+};
+document.addEventListener("click", function(){ if (menu.classList.contains("on")) setMenu(false); });
+menu.querySelectorAll("li[data-app]").forEach(function(li){ if (li.dataset.app !== "close" && li.dataset.app !== "thanks") li.querySelector(".ic").innerHTML = iconFor(li.dataset.app); });
+if (!playlistId(SPOTIFY_PLAYLIST)) menu.querySelector('[data-app="fm"]').style.display = "none";
+
+// ---------- desktop icons ----------
+// tap / click to open, drag to move. they start scattered in the space under the contact info.
+var ICONS = [
+  ["me", "me"], ["moto", "motorcycles"], ["photo", "photos of friends"], ["animals", "beasts and critters"],
+  ["trailcam", "trail clips"], ["art", "art i like"], ["reading", "reading_list.txt"], ["fm", "maxojkb.fm"]
+];
+var JITTER = [[4, 10], [-6, 22], [8, 0], [-2, 16], [10, 6], [-8, 18], [2, 2], [6, 20]];   // fixed, so it looks scattered, not gridded
+var desk = document.getElementById("desk"), icons = [];
+ICONS.forEach(function(d, k){
+  if (d[0] === "fm" && !playlistId(SPOTIFY_PLAYLIST)) return;
+  var el = document.createElement("div");
+  el.className = "icon"; el.title = d[1];
+  el.innerHTML = '<span class="g"></span><span class="l"></span>';
+  el.querySelector(".g").innerHTML = iconFor(d[0]); el.querySelector(".l").textContent = d[1];
+  desk.appendChild(el); icons.push(el); el._k = k;
+  var sx, sy, ox, oy, dragged = false;
+  el.addEventListener("pointerdown", function(e){
+    sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; dragged = false;
+    el.setPointerCapture(e.pointerId);
+    el.onpointermove = function(m){
+      if (!dragged && Math.abs(m.clientX - sx) + Math.abs(m.clientY - sy) < 5) return;   // a tap, not a drag
+      dragged = true; el._moved = true;
+      el.style.left = (ox + m.clientX - sx) + "px"; el.style.top = (oy + m.clientY - sy) + "px";
+    };
+  });
+  el.addEventListener("pointerup", function(){ el.onpointermove = null; });
+  el.addEventListener("click", function(e){
+    e.stopPropagation();
+    icons.forEach(function(x){ x.classList.toggle("sel", x === el); });
+    if (!dragged) openApp(d[0]);
+  });
+});
+document.addEventListener("click", function(){ icons.forEach(function(x){ x.classList.remove("sel"); }); });
+function layoutIcons(){
+  var w = desk.clientWidth, cols = Math.max(3, Math.min(icons.length, Math.floor(w / 86)));
+  var rows = Math.ceil(icons.length / cols), cell = w / cols;
+  desk.style.height = (rows * 92 + 16) + "px";
+  icons.forEach(function(el, n){
+    if (el._moved) return;
+    var j = JITTER[el._k % JITTER.length];
+    el.style.left = Math.max(0, Math.min(w - 78, (n % cols) * cell + (cell - 78) / 2 + j[0])) + "px";
+    el.style.top  = (Math.floor(n / cols) * 92 + j[1]) + "px";
+  });
+}
+layoutIcons(); addEventListener("resize", layoutIcons);
+
+// ---------- on arrival: photos of me + the player ----------
+openApp("thanks");
+var meWin = openApp("me");
+openApp("fm");
+if (meWin) front(meWin);          // photos of me on top; the player waits behind it
+drawTasks();
+</script>
+</body>
+</html>
