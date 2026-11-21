@@ -527,12 +527,24 @@ var GALLERIES = {
   trailcam: { name: "trail clips",       dir: "img/trail clips/", kind: "vid" }
 };
 var EXTS = { img: ["jpg", "jpeg", "png", "gif", "webp"], vid: ["mp4", "webm", "mov", "m4v"] };
-function probe(g, n, cb){                      // backup: finds n.<ext>, or calls cb(null)
+// finds n.<ext> in a folder, or calls cb(null).
+// on the live site it only asks the server "does this file exist?" (a tiny HEAD request),
+// so counting a gallery doesn't download every photo. the extension that worked last time is tried first.
+function probe(g, n, cb){
   var exts = [];
   EXTS[g.kind].forEach(function(x){ exts.push(x, x.toUpperCase()); });
+  if (g.lastExt){ exts.splice(exts.indexOf(g.lastExt), 1); exts.unshift(g.lastExt); }
+  var light = /^https?:$/.test(location.protocol);
   (function tryExt(i){
     if (i >= exts.length) return cb(null);
     var url = encodeURI(g.dir + n + "." + exts[i]);
+    if (light){
+      fetch(url, { method: "HEAD" })
+        .then(function(r){ if (r.ok){ g.lastExt = exts[i]; cb(url); } else tryExt(i + 1); })
+        .catch(function(){ tryExt(i + 1); });
+      return;
+    }
+    // opening the file straight from your computer: fall back to loading it
     var el = g.kind === "vid" ? document.createElement("video") : new Image();
     function ok(){ el.onload = el.onerror = el.onloadedmetadata = null; cb(url); }
     function no(){ el.onload = el.onerror = el.onloadedmetadata = null; tryExt(i + 1); }
@@ -639,6 +651,7 @@ function openGallery(key){
     var it = items[i];
     if (vid){ media.pause(); vc.reset(); }
     media.src = it.url;
+    if (!vid && items.length > 1){ var nx = new Image(); nx.src = items[(i + 1) % items.length].url; }   // so Next feels instant
     w.querySelector(".t").textContent = decodeURIComponent(it.url.split("/").pop());
     label();
     {
@@ -659,7 +672,7 @@ function openGallery(key){
   b[1].onclick = function(e){ e.preventDefault(); show(i + 1); };
   w._step = show; w._idx = function(){ return i; };
   label();
-  discover(g, function(it){ items.push(it); if (items.length === 1) show(0); else label(); },
+  discover(g, function(it){ items.push(it); if (items.length === 1) show(0); else { label(); if (items.length === 2 && !vid){ var nx = new Image(); nx.src = it.url; } } },
               function(){ done = true; if (!items.length) w.querySelector(".t").textContent = g.name + " (empty)"; label(); });
   if (key === "art") place(w, 460, 640); else if (vid) place(w, 600, 480); else place(w, 380, 560);
   return w;
@@ -761,6 +774,10 @@ function playlistId(link){
 }
 function mmss(ms){ var t = Math.floor((ms || 0) / 1000); return Math.floor(t / 60) + ":" + ("0" + t % 60).slice(-2); }
 
+function afterLoad(fn){
+  function go(){ setTimeout(fn, 800); }
+  if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
+}
 function openPlayer(){
   var id = playlistId(SPOTIFY_PLAYLIST);
   if (!id) return null;
@@ -816,10 +833,10 @@ function openPlayer(){
     if (!window.__spotifyScript){
       var sc = window.__spotifyScript = document.createElement("script");
       sc.src = "https://open.spotify.com/embed/iframe-api/v1"; sc.async = true; sc.onerror = fallback;
-      document.body.appendChild(sc);
+      afterLoad(function(){ document.body.appendChild(sc); });   // spotify waits until the page itself has loaded
     }
   }
-  setTimeout(fallback, 6000);
+  afterLoad(function(){ setTimeout(fallback, 8000); });
   return p;
 }
 
